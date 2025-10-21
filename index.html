@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/estilo.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="js/auxiliar.js"></script>
+
+    <title>Agenda PSH</title>
+
+</head>
+
+<body onload="criacaoDoDia(),carregaDados()" onchange="criacaoDoDia(),carregaDados()">
+
+
+    <header>
+        <div class="container-titulo">
+            <h1 id="logo">Cong. Batista de Árvores Verdes no PSH</h1>
+            <div>
+
+                <p class="desc"><span class="material-icons">
+                        arrow_right
+                    </span>Pr. Bruno Sousa</p>
+
+            </div>
+        </div>
+        <div class="containerRight">
+
+            <span class="ic">
+                <span class="material-icons">calendar_today</span>
+                <h2 class="mes"></h2>
+            </span>
+
+            <span class="versiculo">Venham, vamos adorar e nos prostrar,<br>
+                vamos nos ajoelhar diante do Senhor, nosso Criador. Sl. 95:6</span>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="sidebar">
+
+            <span class="desc">Agenda para Cultos e Aniversariantes do mês</span>
+
+            <div class="divAtalaias">
+                <h3>Atalaias</h3>
+                <div></div>
+            </div>
+
+            <div class="divInf">
+                <h3>Min. Infantil</h3>
+                <div></div>
+            </div>
+
+
+            <div class="dash">
+
+                <img id="close" src="./img/close.png" onclick="fecharEdicao()">
+
+                <div class="selectItens">
+                    <select id="selecaoMes"></select>
+                    <select id="selecaoAno"></select>
+                </div>
+
+                <div class="clEdit">
+
+                    <div class="clTopo">
+                        <label class="ESem"></label>
+                        <label class="EDia"></label>
+                    </div>
+
+                    <div class="edicao">
+                        <div class="corpo">
+                            <form>
+
+                                <input class="EDir" placeholder="Dirigente">
+                                <input class="EPreg" placeholder="Pregador">
+                                <input class="EProg" placeholder="Evento">
+
+
+                                <input class="ata1" placeholder="Atalaia 01">
+                                <input class="ata2" placeholder="Atalaia 02">
+
+                                <input class="inf1" placeholder="Inf 01">
+                                <input class="inf2" placeholder="Inf 02">
+                            </form>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <input id="btnRegistrar" type="button" onclick="add(), carregaDados()" value="Registrar Dia">
+                <input id="btnSalvar" type="button" onclick="gerarPDF()" value="Gerar PDF">
+                <input id="btnLimparBD" type="button" value="Apagar Registro" onclick="limparRegistro()">
+
+                <div class="sugestoes"></div>
+
+            </div>
+        </div>
+
+        <div class="calendario">
+
+            <div class="info-topo">
+
+                <div class="mens"></div>
+            </div>
+
+            <table class="tabelaCalendario"></table>
+
+            <div class="info">
+
+                <div class="mens"></div>
+            </div>
+        </div>
+
+    </main>
+
+
+    <script src="js/variaveis.js"></script>
+    <script src="js/controle.js"></script>
+    <script src="js/calendario.js"></script>
+    <script src="js/sidebar.js"></script>
+
+</body>
+
+</html>
