@@ -269,7 +269,7 @@ function verificaTitulo(nome) {
             return `Pr. ${nome}`
         case "Rui":
         case "Marcio":
-        case "Paulo":
+        case "Paulo Leão":
             return `Miss. ${nome}`
         case "":
             return ""

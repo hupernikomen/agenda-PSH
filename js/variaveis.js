@@ -24,9 +24,9 @@ const vr = {
 
     "pastores": [ "Bruno Sousa","Isaac Melo", "Marcio", "Paulo Leão", "Raimundo"],
 
-    "atalaias": ["Helson", "Paulo", "Moisés", "Laudecy", "Carlos"],
+    "atalaias": ["Helson", "Paulo", "Moisés", "Laudecy", "Daniel"],
 
-    "inf": ["Fernanda", "Paulinha", "Tanandra", "Neta", "Valdelene", "Nayra", "Luisa", "Helson"],
+    "inf": ["Fernanda", "Paulinha", "Tanandra", "Neta", "Valdelene", "Nayra", "Luisa"],
 
     "listaAniversariantes": [
 
