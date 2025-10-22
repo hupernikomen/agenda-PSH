@@ -32,7 +32,9 @@ const vr = {
 
         {
             1: {
+                1: ["Vitória"],
                 8: ["Helson Miguel"],
+                18: ["Almir"],
             },
             2: {
                 7: ["Edson Magalhães"],
@@ -51,6 +53,8 @@ const vr = {
                 27: ["Raimundo Pereira"],
             },
             5: {
+                10: ["Rosa"],
+                16: ["João Vitor"],
                 24: ["Maria Cleidiane"],
 
             },
@@ -60,6 +64,7 @@ const vr = {
             },
             7: {
                 11: ["Moisés Machado"],
+                22: ["Bruno Sousa"],
             },
             8: {
                 12: ["Alvaro Caleb"],
@@ -67,17 +72,23 @@ const vr = {
             },
             9: {
                 1: ["Annes Paulo"],
+                3: ["Carla"],
                 8: ["Fernanda Lopes"],
             },
             10: {
+                21: ["Celina"],
             },
             11: {
                 25: ["Paulo Roberto"],
+                26: ["Giulia"],
+                29: ["Luciene"],
             },
             12: {
                 8: ["Theo Leão"],
+                13: ["Toinha"],
                 15: ["Ana Melissa"],
                 26: ["Rhuan Leão"],
+                30: ["Sarah"],
 
             },
         }
