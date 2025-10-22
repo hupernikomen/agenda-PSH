@@ -105,16 +105,22 @@ function gerarPDF() {
 
 function apagarTudo() {
     const chaves = Object.keys(localStorage);
+    let res = confirm(`Tem certeza que deseja apagar TODOS os registros?`)
 
-    // Iterar sobre as chaves e remover as que não são 'ano' ou 'mes'
-    chaves.forEach(chave => {
-        if (chave !== 'ano' && chave !== 'mes') {
-            localStorage.removeItem(chave);
-        }
-    });
+    if (res) {
 
-    carregaDados()
-    fecharEdicao()
+        // Iterar sobre as chaves e remover as que não são 'ano' ou 'mes'
+        chaves.forEach(chave => {
+            if (chave !== 'ano' && chave !== 'mes') {
+                localStorage.removeItem(chave);
+            }
+              document.querySelectorAll('.iconesEventos').forEach(i => i.innerHTML = "")
+        });
+
+        carregaDados()
+        fecharEdicao()
+    }
+
 }
 
 function limparRegistro() {

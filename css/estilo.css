@@ -57,7 +57,7 @@ main {
     position: relative;
     overflow: hidden;
     z-index: 1;
-    background: #3e8a13;
+    background: #138a60;
     min-width: 220px;
     max-width: 220px;
     border-top: 1px solid #28af7b;
@@ -194,7 +194,7 @@ input {
 header {
     position: relative;
     width: 1008px;
-    background: #51942b;
+    background: #138a60;
     padding: 15px;
     display: flex;
     justify-content: space-between;
@@ -264,7 +264,7 @@ header {
     position: relative;
     display: block;
     z-index: 1;
-    background: #3e8a13 linear-gradient(#3e8a13, #469917);
+    background: #138a60 linear-gradient(#138a60, #1b9c6f);
     border-top: 1px solid #28af7b;
     height: 620px;
 }
@@ -280,7 +280,7 @@ header {
 .blocoInvisivel {
     width: 105px;
     height: 95px;
-    margin: 1px;
+    margin: 1px .8px;
     border-radius: 4px;
 }
 
@@ -394,7 +394,7 @@ header div {
     width: 220px;
     transform: translateX(-300px);
     height: 100%;
-    background: #3e8a13;
+    background: #0f8159;
 }
 
 .selectItens {
@@ -496,13 +496,8 @@ form {
 #btnSalvar:hover,
 #btnLimparBD:hover, #btnLimparTudoBD:hover {
     cursor: pointer;
-    background: #3e8a13 !important;
+    background: #1ca977 !important;
     color: #fff;
-}
-
-#btnSalvar:hover,
-#btnLimparBD:hover {
-    border-bottom: 1px solid #e2d523;
 }
 
 /* Sugestões */
@@ -523,5 +518,5 @@ form {
 
 .sugestoes div:hover {
     cursor: pointer;
-    background: #68bd37;
+    background: #1ca977;
 }
