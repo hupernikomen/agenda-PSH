@@ -418,7 +418,7 @@ select {
 
 .clEdit {
     background: #fff;
-    border-radius: 6px;
+    border-radius: 3px;
 }
 
 .clTopo {
@@ -468,6 +468,7 @@ form {
 
 /* Botões de Ação */
 #btnSalvar,
+#btnLimparTudoBD,
 #btnLimparBD {
     border-radius: 2px;
     background: #dfdcd1;
@@ -485,8 +486,8 @@ form {
 
 #btnRegistrar,
 #btnSalvar,
+#btnLimparTudoBD,
 #btnLimparBD {
-    border: 0;
     height: 30px;
     text-align: center;
     margin-top: 3px;
