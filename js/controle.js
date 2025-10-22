@@ -17,7 +17,7 @@ function criaSelecaoDeAno() {
         option.innerHTML = new Date().getFullYear() + i
         vr.ElselectAno.append(option)
     }
-    $("#selecaoAno").val(localStorage.getItem("ano")) 
+    $("#selecaoAno").val(localStorage.getItem("ano"))
 
 }
 
@@ -36,7 +36,7 @@ function criaSelecaoDeMes() {
 }
 
 function editarDia(i) {
-    
+
     abrirEdicao()
     criaSelecaoDeAno()
 
@@ -55,7 +55,7 @@ function editarDia(i) {
     $(".inf1").val(programacaoDoDia(i).inf1 ? programacaoDoDia(i).inf1 : "")
     $(".inf2").val(programacaoDoDia(i).inf2 ? programacaoDoDia(i).inf2 : "")
     $(".inf3").val(programacaoDoDia(i).inf3 ? programacaoDoDia(i).inf3 : "")
-    
+
     $('.sugestoes').html("")
 
     if (descobreDia(i) == 0) {
@@ -88,7 +88,7 @@ function add() {
         inf3: $(".inf3").val(),
     }
 
-    if (cal.prog != "" || cal.dir != "" || cal.preg != "" || cal.ata1 != "" || cal.ata2 != "" || cal.inf1 != "" || cal.inf2 != ""|| cal.inf3 != "") {
+    if (cal.prog != "" || cal.dir != "" || cal.preg != "" || cal.ata1 != "" || cal.ata2 != "" || cal.inf1 != "" || cal.inf2 != "" || cal.inf3 != "") {
         var json = JSON.stringify(cal)
         localStorage.setItem(`${$(".EDia").html()}`, json)
         fecharEdicao()
@@ -101,6 +101,20 @@ function gerarPDF() {
     window.print()
 
 
+}
+
+function apagarTudo() {
+    const chaves = Object.keys(localStorage);
+
+    // Iterar sobre as chaves e remover as que não são 'ano' ou 'mes'
+    chaves.forEach(chave => {
+        if (chave !== 'ano' && chave !== 'mes') {
+            localStorage.removeItem(chave);
+        }
+    });
+
+    carregaDados()
+    fecharEdicao()
 }
 
 function limparRegistro() {
@@ -233,7 +247,7 @@ document.querySelectorAll(".clEdit input").forEach(i => {
                 })
 
                 break;
-           
+
 
         }
     })

@@ -96,8 +96,9 @@
                 </div>
 
                 <input id="btnRegistrar" type="button" onclick="add(), carregaDados()" value="Registrar Dia">
-                <input id="btnSalvar" type="button" onclick="gerarPDF()" value="Gerar PDF">
                 <input id="btnLimparBD" type="button" value="Apagar Registro" onclick="limparRegistro()">
+                <input id="btnSalvar" type="button" onclick="gerarPDF()" value="Gerar PDF">
+                <input style="margin-top: 50px; background-color: rgb(219, 79, 79); color: #fff; border-radius: 4px;" id="btnLimparTudoBD" type="button" value="Apagar Tudo" onclick="apagarTudo()">
 
                 <div class="sugestoes"></div>
 
@@ -116,6 +117,29 @@
             <div class="info">
 
                 <div class="mens"></div>
+            </div>
+        </div>
+
+        <div class="tutorial">
+            <div>
+                <h2>Bem-vindo ao sistema de agenda da Congregação Batista de Árvores Verdes no PSH!</h2>
+                <br/>
+                <p>Este sistema foi desenvolvido para facilitar o gerenciamento da escala de cultos e aniversariantes do mês.</p>
+                <br/>
+                <h3>Como usar:</h3>
+                <br/>
+                <ol>
+                    <li>Para adicionar ou editar informações de um dia específico, clique na célula correspondente no calendário.</li>
+                    <li>Preencha os campos necessários, como Dirigente, Pregador, Evento, Atalaias e Ministros Infantis.</li>
+                    <li>Clique em "Registrar Dia" para salvar as informações.</li>
+                    <li>Use os botões na barra lateral para gerar um PDF da agenda ou apagar registros conforme necessário.</li>
+                </ol>
+                <br/>
+                <li>As informações de aniversariantes do mês serão exibidas automaticamente.</li>
+                <li>Para salvar como PDF, ao aparecer a tela de impressão, selecione a opção "Salvar como PDF" no seu navegador.</li>
+                <li>Apagar registros antigos é fácil! Use o botão "Apagar Tudo" para remover todas as informações de uma vez.</li>
+                <br/>
+                <p>Explore as funcionalidades e aproveite a praticidade do sistema!</p>
             </div>
         </div>
 
