@@ -33,47 +33,46 @@ const vr = {
         {
             1: {
                 1: ["Vitória"],
-                8: ["Helson Miguel"],
+                8: ["Helson"],
                 18: ["Almir"],
             },
             2: {
-                7: ["Edson Magalhães"],
                 8: ["Vitor Gabriel (Biel)"],
                 10: ["Lia"],
                 11: ["Luiza"],
-                17: ["Tanandra Daniele"],
-                18: ["Samara Machado"],
+                17: ["Tanandra"],
+                18: ["Samara"],
             },
             3: {
                 5: ["Maria Dimas"]
             },
             4: {
                 11: ["Ana Paula ( Paulinha )"],
-                14: ["Wilson Ramos"],
+                14: ["Wilson"],
                 27: ["Raimundo Pereira"],
             },
             5: {
                 10: ["Rosa"],
                 16: ["João Vitor"],
-                24: ["Maria Cleidiane"],
+                24: ["Cleidiane"],
 
             },
             6: {
-                5: ["Laura Bezerra"],
-                6: ["Valdelene Araújo"],
+                5: ["Laura"],
+                6: ["Valdelene"],
             },
             7: {
-                11: ["Moisés Machado"],
+                11: ["Moisés"],
                 22: ["Bruno Sousa"],
             },
             8: {
-                12: ["Alvaro Caleb"],
-                14: ["Laudecy Sena"],
+                12: ["Alvaro"],
+                14: ["Laudecy"],
             },
             9: {
-                1: ["Annes Paulo"],
+                1: ["Annes"],
                 3: ["Carla"],
-                8: ["Fernanda Lopes"],
+                8: ["Fernanda"],
             },
             10: {
                 21: ["Celina"],
@@ -84,10 +83,10 @@ const vr = {
                 29: ["Luciene"],
             },
             12: {
-                8: ["Theo Leão"],
+                8: ["Theo"],
                 13: ["Toinha"],
-                15: ["Ana Melissa"],
-                26: ["Rhuan Leão"],
+                15: ["Melissa"],
+                26: ["Rhuan"],
                 30: ["Sarah"],
 
             },
