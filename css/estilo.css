@@ -3,241 +3,138 @@
 
 /* Configurações de impressão */
 @media print {
-    body {
-        -webkit-print-color-adjust: exact;
-        width: 210mm; 
-        height: 148mm; 
-    }
-}
-
-@media print {
-    .tutorial {
-        display: none;
-    }
+  body {
+    -webkit-print-color-adjust: exact;
+    width: 210mm;
+    height: 148mm;
+  }
+  .tutorial {
+    display: none;
+  }
 }
 
 @page {
-    size: A5 landscape;
-    margin: 0;
+  size: A5 landscape;
+  margin: 0;
 }
 
 /* Reset e Estilo Global */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
-
 body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-    display: flex;
+  display: flex;
 }
 
+input {
+  outline: none;
+}
+
+/* Tutorial */
 .tutorial {
-    margin: 40px;
-    bottom: 15px;
-    right: 15px;
-    background: #f3f3f3;
-    color: #000;
-    padding:  40px;
-    border-radius: 6px;
-    font-size: 0.70rem;
+  margin: 40px;
+  bottom: 15px;
+  right: 15px;
+  background: #f3f3f3;
+  color: #000;
+  padding: 40px;
+  border-radius: 6px;
+  font-size: 0.7rem;
 }
 
 /* Sidebar */
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    background: #138a60;
-    min-width: 220px;
-    max-width: 220px;
-    border-top: 1px solid #28af7b;
-    padding: 15px;
-    font-size: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: #138a60;
+  min-width: 220px;
+  max-width: 220px;
+  border-top: 1px solid #28af7b;
+  padding: 15px;
+  font-size: 0.65rem;
 }
 
 .sidebar h3 {
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 500;
-    margin: 15px 0;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin: 15px 0;
 }
 
-.nome {
-    font-size: 11px;
-    color: #fff;
-}
-
-/* Listas */
-.divAtalaias,
-.divInf {
-    color: #abffdf;
-}
-
-.containerLista {
-    display: flex;
-}
-
-.atalaiasList,
-.infList {
-    display: flex;
-    align-items: center;
-    margin-bottom: 4px;
-}
-
-.atalaia1,
-.inf1, 
-.inf2 {
-    margin-right: 3px;
-}
-
-.atalaia1,
-.atalaia2,
-.inf1,
-.inf2 {
-    display: flex;
-    align-items: center;
-    border-radius: 6px;
-    border: 1px solid #2bbe85;
-    padding: 4px 5px;
-}
-
-/* Datas de Aniversário */
-.diaAta,
-.diaAmor,
-.diaInf {
-    color: #fff;
-    width: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-div.dataNiv {
-    border-radius: 6px;
-    margin-right: 6px;
-    margin-bottom: 4px;
-}
-
-.dataNiv {
-    display: flex;
-    align-items: center;
-}
-
-.diaNiv {
-    background: #fff;
-    font-size: 10px;
-    width: 16px;
-    height: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 6px;
-    margin-left: 10px;
-    border-radius: 6px;
-}
-
-/* Estilos Gerais */
-.desc,
-#subtitulo,
-.versiculo {
-    color: #abffdf;
-    font-size: 0.75rem;
-}
-
-.calendario {
-    display: flex;
-    flex-direction: column;
-    padding: 15px 15px;
-}
-
-.ESem,
-.EDia,
-.sugestoes,
-.blocoDia {
-    font-size: 0.60rem;
-}
-
-.blocoDia,
-.blocoInvisivel,
-.topo,
-body {
-    display: flex;
-}
-
-.nome,
-#logo,
-.corpo span {
-    display: block;
-}
-
-.container-titulo {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-input {
-    outline: none;
-}
-
-/* HEADER */
+/* Header */
 header {
-    position: relative;
-    width: 1008px;
-    background: #138a60;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
+  position: relative;
+  width: 1008px;
+  background: #138a60;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.container-titulo p {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+header div {
+  display: flex;
+  align-items: center;
 }
 
+/* Container */
+.container-titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container-titulo p,
 .container-titulo div {
-    width: 100%;
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  width: 100%;
 }
 
 .containerRight {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 }
 
-.ic {
-    display: flex;
-    align-items: center;
+.containerLista {
+  display: flex;
 }
 
-.versiculo {
-    width: 400px;
-    text-align: end;
+/* Calendário */
+.calendario {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  width: 788px;
+  position: relative;
+  display: block;
+  z-index: 1;
+  background: #138a60 linear-gradient(#138a60, #1b9c6f);
+  border-top: 1px solid #28af7b;
+  height: 620px;
 }
 
-#logo,
-.mes {
-    text-transform: uppercase;
-    font-weight: 700;
-    color: #fff;
-    font-size: 22px;
+.tabelaCalendario {
+  position: relative;
+  bottom: 0;
+  z-index: 1;
+  width: 758px;
 }
 
-/* CALENDÁRIO */
 .dom,
 .seg,
 .ter,
@@ -245,279 +142,364 @@ header {
 .qui,
 .sex,
 .sab {
-    float: left
-
+  float: left;
 }
+/* */
 
-
-.mens {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: start;
-    width: 500px;
-    max-height: 90px;
-}
-
-.calendario {
-    width: 788px;
-    position: relative;
-    display: block;
-    z-index: 1;
-    background: #138a60 linear-gradient(#138a60, #1b9c6f);
-    border-top: 1px solid #28af7b;
-    height: 620px;
-}
-
-.tabelaCalendario {
-    position: relative;
-    bottom: 0;
-    z-index: 1;
-    width: 758px;
+/* Blocos */
+.blocoDia,
+.blocoInvisivel,
+.topo {
+  display: flex;
 }
 
 .blocoDia,
 .blocoInvisivel {
-    width: 105px;
-    height: 95px;
-    margin: 1px .8px;
-    border-radius: 2px;
-}
-
-.material-icons {
-    color: #fff;
-    font-size: 16px !important;
-    margin-right: 10px;
-}
-
-header div {
-    display: flex;
-    align-items: center;
+  width: 105px;
+  height: 95px;
+  margin: 1px 0.8px;
+  border-radius: 2px;
 }
 
 .blocoDia {
-    position: relative;
-    flex-direction: column;
-    justify-content: flex-start;
-    background: #fff;
-    font-weight: 500;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #fff;
+  font-weight: 500;
+  font-size: 0.6rem;
 }
 
 .blocoDia:hover {
-    cursor: pointer;
-    opacity: 0.85;
+  cursor: pointer;
+  opacity: 0.85;
 }
 
 .blocoInvisivel {
-    background: transparent;
+  background: transparent;
 }
 
 .blocoDia .topo {
-    justify-content: space-between;
-    align-items: center;
-    height: 16px;
-    padding: 0px 5px;
-    text-transform: uppercase;
+  justify-content: space-between;
+  align-items: center;
+  height: 16px;
+  padding: 0 5px;
+  text-transform: uppercase;
 }
 
 .blocoDia #domRed {
-    background: #ff4242;
-    font-weight: 500;
-    color: #fff;
+  background: #ff4242;
+  font-weight: 500;
+  color: #fff;
 }
 
 .blocoDia .corpo {
-    padding: 4px;
-}
-
-.pregador {
-    background: #fcf0bf;
-    border-radius: 6px;
+  padding: 4px;
 }
 
 .blocoDia .icones {
-    position: absolute;
-    bottom: 2px;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+  position: absolute;
+  bottom: 2px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.icones img,
-.iconeBalao {
-    height: 14px;
-    width: 14px;
-    margin: 0 2px;
+
+
+/* Listas */
+.divAtalaias,
+.divInf {
+  color: #abffdf;
+}
+
+.atalaiasList,
+.infList {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  margin-left: -6px;
+}
+
+.atalaia1,
+.atalaia2,
+.inf1,
+.inf2 {
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid #2bbe85;
+  padding: 4px 5px;
+}
+
+.atalaia1,
+.inf1,
+.inf2 {
+  margin-right: 3px;
+}
+
+/* Datas de Aniversário */
+.dataNiv,
+div.dataNiv {
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+}
+
+div.dataNiv {
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+.diaAta,
+.diaAmor,
+.diaInf {
+  color: #fff;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diaNiv {
+  background: #fff;
+  font-size: 10px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 6px;
+  margin-left: 10px;
+  border-radius: 6px;
 }
 
 /* Informações */
 .info,
 .info-topo {
-    margin-top: 20px;
-    display: flex;
-    align-items: flex-start;
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-start;
 }
 
 .info-topo {
-    position: absolute;
-    margin-top: 0 !important;
-    gap: 20px;
+  position: absolute;
+  margin-top: 0 !important;
+  gap: 20px;
 }
 
 .info p,
 .info-topo p {
-    padding: 2px 8px;
-    font-size: 12px;
-    width: fit-content;
-    border-radius: 4px;
-    background: #fcf0bf;
-    font-weight: 500;
-    color: #222;
+  padding: 2px 8px;
+  font-size: 12px;
+  width: fit-content;
+  border-radius: 4px;
+  background: #fcf0bf;
+  font-weight: 500;
+  color: #222;
 }
 
-/* CONTROLE */
-#close {
-    width: 18px;
-    position: absolute;
-    right: 15px;
-    cursor: pointer;
-    filter: invert();
-}
-
+/* Controle */
 .dash {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 15px;
-    z-index: 0;
-    transition: all 0.1s;
-    width: 220px;
-    transform: translateX(-300px);
-    height: 100%;
-    background: #0f8159;
-}
-
-.selectItens {
-    width: 100%;
-    margin: 30px 0 5px;
-    display: flex;
-    justify-content: space-between;
-}
-
-select {
-    height: 30px;
-    padding: 0 10px;
-    font-size: 0.75rem;
-    outline: none;
-    border-radius: 2px;
-}
-
-#selecaoAno {
-    width: 40%;
-}
-
-.clEdit {
-    background: #fff;
-    border-radius: 3px;
-}
-
-.clTopo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 25px;
-    border-radius: 2px 2px 0 0;
-    padding: 0 15px;
-    text-transform: uppercase;
-}
-
-.edicao {
-    margin: 5px 0;
-}
-
-.topo label {
-    font-size: 0.70rem;
-    font-weight: 700;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  z-index: 0;
+  transition: all 0.1s;
+  width: 220px;
+  transform: translateX(-300px);
+  height: 100%;
+  background: #0f8159;
 }
 
 .dash input {
-    width: 100%;
-    height: 25px;
-    font-size: 0.75rem;
-    padding: 0 10px;
-    border: none;
+  width: 100%;
+  height: 25px;
+  font-size: 0.75rem;
+  padding: 0 10px;
+  border: none;
 }
 
-.atalaiasInput {
-    margin-bottom: 5px;
+/* Formulários */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 5px;
+}
+
+.clEdit {
+  background: #fff;
+  border-radius: 3px;
 }
 
 .clEdit input {
-    width:     100%;
-    margin: 0 auto;
-    border: none;
+  width: 100%;
+  margin: 0 auto;
+  border: none;
+}
+
+.clTopo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 25px;
+  border-radius: 2px 2px 0 0;
+  padding: 0 15px;
+  text-transform: uppercase;
+}
+
+.selectItens {
+  width: 100%;
+  margin: 30px 0 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+select {
+  height: 30px;
+  padding: 0 10px;
+  font-size: 0.75rem;
+  outline: none;
+  border-radius: 2px;
+}
+
+#selecaoAno {
+  width: 40%;
+}
+
+.atalaiasInput {
+  margin-bottom: 5px;
+}
+
+.edicao {
+  margin: 5px 0;
 }
 
 /* Botões de Ação */
-#btnSalvar,
-#btnLimparTudoBD,
-#btnLimparBD {
-    border-radius: 2px;
-    background: #dfdcd1;
-}
-
-#btnLimparBD {
-    display: none;
-}
-
-#btnRegistrar {
-    border-radius: 2px;
-    margin-bottom: 5px;
-    background: #fff;
-}
-
 #btnRegistrar,
 #btnSalvar,
 #btnLimparTudoBD,
 #btnLimparBD {
-    height: 30px;
-    text-align: center;
-    margin-top: 3px;
+  height: 30px;
+  text-align: center;
+  margin-top: 3px;
+  border-radius: 2px;
+}
+
+#btnSalvar,
+#btnLimparTudoBD,
+#btnLimparBD {
+  background: #dfdcd1;
+}
+
+#btnRegistrar {
+  margin-bottom: 5px;
+  background: #fff;
+}
+
+#btnLimparBD {
+  display: none;
 }
 
 #btnRegistrar:hover,
 #btnSalvar:hover,
-#btnLimparBD:hover, #btnLimparTudoBD:hover {
-    cursor: pointer;
-    background: #1ca977 !important;
-    color: #fff;
+#btnLimparTudoBD:hover,
+#btnLimparBD:hover {
+  cursor: pointer;
+  background: #1ca977 !important;
+  color: #fff;
+}
+
+/* Estilos Gerais */
+.nome,
+#logo,
+.corpo span {
+  display: block;
+}
+
+.nome {
+  font-size: 11px;
+  color: #fff;
+}
+
+#logo,
+.mes {
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #fff;
+  font-size: 22px;
+}
+
+.desc,
+#subtitulo,
+.versiculo {
+  color: #abffdf;
+  font-size: 0.75rem;
+
+}
+
+.versiculo {
+  width: 400px;
+  text-align: end;
+}
+
+.ESem,
+.EDia,
+.sugestoes {
+  font-size: 0.6rem;
+}
+
+.ic {
+  display: flex;
+  align-items: center;
+}
+
+.material-icons {
+  color: #fff;
+  font-size: 16px !important;
+  margin-right: 10px;
+}
+
+.pregador {
+  background: #fff7d6;
+  border-radius: 3px;
+}
+
+.icones img,
+.iconeBalao {
+  height: 14px;
+  width: 14px;
+  margin: 0 2px;
+}
+
+#close {
+  width: 18px;
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+  filter: invert();
 }
 
 /* Sugestões */
 .sugestoes {
-    margin-top: 30px;
-    width: 100%;
-    overflow-y: auto;
-    color: #777;
+  margin-top: 30px;
+  width: 100%;
+  overflow-y: auto;
+  color: #777;
 }
 
 .sugestoes div {
-    display: inline-block;
-    margin: 2px;
-    border-radius: 20px;
-    color: #fff;
-    padding: 2px 5px;
+  display: inline-block;
+  margin: 2px;
+  border-radius: 20px;
+  color: #fff;
+  padding: 2px 5px;
 }
 
 .sugestoes div:hover {
-    cursor: pointer;
-    background: #1ca977;
+  cursor: pointer;
+  background: #1ca977;
 }

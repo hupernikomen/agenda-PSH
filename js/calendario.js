@@ -294,7 +294,7 @@ function carregaDados() {
         document.querySelector(`#pregador${i}`).innerHTML = verificaTitulo(programacaoDoDia(i).preg)
 
         if (verificaTitulo(programacaoDoDia(i).preg)) {
-            document.querySelector(`#pregador${i}`).style.padding = "1px 5px"
+            document.querySelector(`#pregador${i}`).style.padding = ".5px 1px"
             document.querySelector(`#pregador${i}`).style.marginBottom = "5px"
             document.querySelector(`#pregador${i}`).style.marginTop = "2px"
         } else {
