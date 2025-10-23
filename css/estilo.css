@@ -144,7 +144,15 @@ header div {
 .sab {
   float: left;
 }
-/* */
+
+.mens {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  width: 500px;
+  max-height: 90px;
+}
 
 /* Blocos */
 .blocoDia,
