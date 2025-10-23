@@ -42,8 +42,15 @@ function editarDia(i) {
 
     criaSelecaoDeMes()
 
-    let btn = $('#btnLimparBD')
-    localStorage.getItem(i) ? btn.css("display", "block") : btn.css("display", "none")
+let btnReg = $('#btnRegistrar');
+let btn = $('#btnLimparBD');
+if (localStorage.getItem(i)) {
+    btn.css("display", "block");
+    btnReg.val("Atualizar Dia");
+} else {
+    btn.css("display", "none");
+    btnReg.val("Registrar Dia");
+}
 
     $(".ESem").html(vr.diasDaSem[descobreDia(i)])
     $(".EDia").html(i)

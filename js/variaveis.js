@@ -24,9 +24,9 @@ const vr = {
 
     "pastores": [ "Bruno Sousa","Isaac Melo", "Marcio", "Paulo Leão", "Raimundo"],
 
-    "atalaias": ["Helson", "Paulo", "Moisés", "Laudecy", "Daniel"],
+    "atalaias": ["Helson", "Paulo Leão", "Laudecy", "Daniel"],
 
-    "inf": ["Fernanda", "Paulinha", "Tanandra", "Neta", "Valdelene", "Nayra", "Luisa"],
+    "inf": ["Fernanda", "Paulinha", "Tanandra", "Neta", "Valdelene", "Nayra", "Luisa", "Luciene", "Ivoneide"],
 
     "listaAniversariantes": [
 
@@ -78,7 +78,7 @@ const vr = {
                 21: ["Celina"],
             },
             11: {
-                25: ["Paulo Roberto"],
+                25: ["Paulo Leão"],
                 26: ["Giulia"],
                 29: ["Luciene"],
             },

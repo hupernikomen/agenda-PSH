@@ -11,12 +11,12 @@ function listagemDeAtalaias() {
 
     for (let i = 1; i <= UltimoDiaDoMes(); i++) {
 
-        if (programacaoDoDia(i).ata1 || programacaoDoDia(i).ata2 ) {
+        if (programacaoDoDia(i).ata1  ) {
 
 
 
             let atalaia1 = document.createElement('span')
-            let atalaia2 = document.createElement('span')
+            // let atalaia2 = document.createElement('span')
             let atalaias = document.createElement('div')
             var dia = document.createElement('div')
 
@@ -24,14 +24,14 @@ function listagemDeAtalaias() {
 
             dia.className = 'diaAta'
             atalaia1.className = programacaoDoDia(i).ata1 && 'atalaia1'
-            atalaia2.className = programacaoDoDia(i).ata2 && 'atalaia2'
+            // atalaia2.className = programacaoDoDia(i).ata2 && 'atalaia2'
             atalaias.className = 'atalaiasList'
 
-            atalaias.append(dia, atalaia1, atalaia2)
+            atalaias.append(dia, atalaia1) // incluir atalaia2
 
             dia.innerHTML = programacaoDoDia(i).dia
             atalaia1.innerHTML = programacaoDoDia(i).ata1
-            atalaia2.innerHTML = programacaoDoDia(i).ata2
+            // atalaia2.innerHTML = programacaoDoDia(i).ata2
         }
     }
 }
