@@ -61,6 +61,7 @@ input {
   background: #138a60;
   min-width: 220px;
   max-width: 220px;
+   height: 620px;
   border-top: 1px solid #28af7b;
   padding: 15px;
   font-size: 0.65rem;
@@ -482,6 +483,13 @@ select {
   width: 14px;
   margin: 0 2px;
 }
+
+.iconesEventos ion-icon {
+    font-size: 12px;
+    margin-right: 4px;
+    color: #bc9600; /* Cor padrão do Ionic, ajuste conforme necessário */
+}
+
 
 #close {
   width: 18px;

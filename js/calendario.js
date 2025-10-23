@@ -85,106 +85,111 @@ function corpoDoDia(dia) {
 
 }
 
+
+
 function containerIcones(dia) {
+    let icones = document.createElement('div');
+    icones.className = "icones";
+    icones.id = `ic${vr.diasDaSem[descobreDia(dia)]}${dia}`;
 
-    let icones = document.createElement('div')
-    icones.className = "icones"
-    icones.id = `ic${vr.diasDaSem[descobreDia(dia)]}${dia}`
-
-    let containerIconesEventos = document.createElement('div')
-    containerIconesEventos.className = 'iconesEventos'
-    icones.prepend(containerIconesEventos)
+    let containerIconesEventos = document.createElement('div');
+    containerIconesEventos.className = 'iconesEventos';
+    icones.prepend(containerIconesEventos);
 
     if (vr.listaAniversariantes[0][selectMes()][dia] != null) {
-
-        let containerAniv = document.createElement('div')
-        let iconeAniversario = document.createElement("img")
-        iconeAniversario.src = "../img/balao.ico"
-        containerAniv.append(iconeAniversario)
-        icones.append(containerAniv)
+        let containerAniv = document.createElement('div');
+        let iconeAniversario = document.createElement("ion-icon");
+        iconeAniversario.setAttribute("name", "balloon"); // Ícone de balão para aniversário
+        iconeAniversario.style.color = "#d40404ff"; // Cor inline (vermelho para teste)
+        iconeAniversario.style.fontSize = "12px"; // Tamanho inline
+        iconeAniversario.style.marginRight = "4px"; // Tamanho inline
+        containerAniv.append(iconeAniversario);
+        icones.append(containerAniv);
     }
 
-    return icones
+    return icones;
 }
 
 function iconesEventos(dia) {
-    if (programacaoDoDia(dia).prog) {
+    if (programacaoDoDia(dia).prog && programacaoDoDia(dia).prog.length > 0) {
+        let icones = document.querySelector(`#ic${vr.diasDaSem[descobreDia(dia)]}${dia} .iconesEventos`);
+        if (!icones) return; // Sai se o container não existe
 
-        let icones = document.querySelector(`#ic${vr.diasDaSem[descobreDia(dia)]}${dia} .iconesEventos`)
+        // Limpa todos os ícones existentes no container
+        icones.innerHTML = "";
 
         programacaoDoDia(dia).prog.forEach((evento) => {
-
-            icones.innerHTML = ""
+            let icone = document.createElement("ion-icon");
 
             switch (evento) {
-
                 case "Aniv. da Igreja":
-                    let iconeAnivIgreja = document.createElement("img")
-                    iconeAnivIgreja.src = "../img/star.ico"
-                    icones.append(iconeAnivIgreja)
-                    break
-
-                case "Confraternização":
-                    let iconeConfraternizacao = document.createElement("img")
-                    iconeConfraternizacao.src = "../img/confra.ico"
-                    icones.append(iconeConfraternizacao)
-                    break
-
+                    icone.setAttribute("name", "star-outline"); // Ícone de casa/igreja
+                    icones.append(icone);
+                    break;
+                case "Reunião":
+                    icone.setAttribute("name", "chatbubbles-outline"); // Ícone de casa/igreja
+                    icones.append(icone);
+                    break;
                 case "Ceia":
-                    let iconeCeia = document.createElement("img")
-                    iconeCeia.src = "../img/ceia.ico"
-                    icones.append(iconeCeia)
-                    break
+                    icone.setAttribute("name", "wine-outline"); // Ícone de vinho/cálice
+                    icones.append(icone);
+                    break;
 
                 case "Enc. de Casais":
-                    let iconeCasais = document.createElement("img")
-                    iconeCasais.src = "../img/coracao.ico"
-                    icones.append(iconeCasais)
-                    break
+                    icone.setAttribute("name", "heart-outline"); // Ícone de coração
+                    icones.append(icone);
+                    break;
 
                 case "Bazar":
-                    let bazar = document.createElement("img")
-                    bazar.src = "../img/bazar.ico"
-                    icones.append(bazar)
-                    break
+                    icone.setAttribute("name", "bag-handle-outline"); // Ícone de sacola
+                    icones.append(icone);
+                    break;
 
                 case "Fest. de Pizza":
-                    let iconePizza = document.createElement("img")
-                    iconePizza.src = "../img/pizza.ico"
-                    icones.append(iconePizza)
-                    break
+                    icone.setAttribute("name", "pizza-outline"); // Ícone de pizza
+                    icones.append(icone);
+                    break;
 
                 case "Cinema":
-                    let cinema = document.createElement("img")
-                    cinema.src = "../img/cinema.ico"
-                    icones.append(cinema)
-                    break
+                    icone.setAttribute("name", "film-outline"); // Ícone de filme
+                    icones.append(icone);
+                    break;
 
                 case "Enc. de Jovens":
-                    let jovens = document.createElement("img")
-                    jovens.src = "../img/jovens.ico"
-                    icones.append(jovens)
-                    break
+                    icone.setAttribute("name", "people-circle"); // Ícone de grupo jovem
+                    icones.append(icone);
+                    break;
 
                 case "Batismo":
-                    let batismo = document.createElement("img")
-                    batismo.src = "../img/batismo.ico"
-                    icones.append(batismo)
-                    break
+                    icone.setAttribute("name", "water-outline"); // Ícone de água
+                    icones.append(icone);
+                    break;
 
                 case "Dia do Pastor":
-                    let iconePastor = document.createElement("img")
-                    iconePastor.src = "../img/pastor.ico"
-                    icones.append(iconePastor)
-                    break
+                    icone.setAttribute("name", "person-outline"); // Ícone simbólico (escola/cruz)
+                    icones.append(icone);
+                    break;
 
                 case "Mutirão":
-                    let iconeMultirao = document.createElement("img")
-                    iconeMultirao.src = "../img/mutirao.ico"
-                    icones.append(iconeMultirao)
-                    break
+                    icone.setAttribute("name", "hammer-outline"); // Ícone de mão ajudando
+                    icones.append(icone);
+                    break;
+
+
+                case "Evangelismo":
+                    icone.setAttribute("name", "footsteps-outline"); // Ícone de mão ajudando
+                    icones.append(icone);
+                    break;
+                case "PGM's":
+                    icone.setAttribute("name", "megaphone-outline"); // Ícone de mão ajudando
+                    icones.append(icone);
+                    break;
+
+
+                default:
+                    return; // Não adiciona nada para eventos desconhecidos
             }
-        })
+        });
     }
 }
 
