@@ -58,6 +58,7 @@ const vr = {
 
             },
             6: {
+                1: ["Ivoneide"],
                 5: ["Laura"],
                 6: ["Valdelene"],
             },
@@ -68,6 +69,7 @@ const vr = {
             8: {
                 12: ["Alvaro"],
                 14: ["Laudecy"],
+                17: ["Daniel"],
             },
             9: {
                 1: ["Annes"],
@@ -75,6 +77,7 @@ const vr = {
                 8: ["Fernanda"],
             },
             10: {
+                6: ["Amoz"],
                 21: ["Celina"],
             },
             11: {
