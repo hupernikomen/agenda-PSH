@@ -37,7 +37,7 @@ const vr = {
                 18: ["Almir"],
             },
             2: {
-                8: ["Vitor Gabriel (Biel)"],
+                8: ["Biel"],
                 10: ["Lia"],
                 11: ["Luiza"],
                 17: ["Tanandra"],
@@ -47,7 +47,7 @@ const vr = {
                 5: ["Maria Dimas"]
             },
             4: {
-                11: ["Ana Paula ( Paulinha )"],
+                11: ["Paulinha"],
                 14: ["Wilson"],
                 27: ["Raimundo Pereira"],
             },
@@ -91,7 +91,6 @@ const vr = {
                 15: ["Melissa"],
                 26: ["Rhuan"],
                 30: ["Sarah"],
-
             },
         }
     ]
