@@ -81,6 +81,7 @@ const vr = {
                 21: ["Celina"],
             },
             11: {
+                12: ["Samuel"],
                 26: ["Giulia"],
                 28: ["Paulo Leão"],
                 29: ["Luciene"],
