@@ -90,6 +90,7 @@ const vr = {
                 8: ["Theo"],
                 13: ["Toinha"],
                 15: ["Melissa"],
+                22: ["Nicolas"],
                 26: ["Rhuan"],
                 30: ["Sarah"],
             },
