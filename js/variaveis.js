@@ -93,7 +93,6 @@ const vr = {
                 15: ["Melissa"],
                 22: ["Nicolas"],
                 26: ["Rhuan"],
-                30: ["Sarah"],
             },
         }
     ]
