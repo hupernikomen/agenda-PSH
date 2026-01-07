@@ -34,7 +34,8 @@ const vr = {
             1: {
                 1: ["Vitória"],
                 8: ["Helson"],
-                18: ["Almir"],
+                19: ["Almir"],
+                30: ["Sarah"],
             },
             2: {
                 8: ["Biel"],
