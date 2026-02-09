@@ -21,127 +21,131 @@
 <body>
 
 
-    <header>
-        <div class="container-titulo">
-            <h1 id="logo">Igreja Batista no PSH</h1>
-            <div>
-
-                <p id="nomePastor" class="desc">
-                    <span class="material-icons">arrow_right</span>Pr. Bruno Sousa
-                </p>
-
-            </div>
-        </div>
-        <div class="containerRight">
-
-            <span class="ic">
-                <span class="material-icons">calendar_today</span>
-                <h2 class="mes"></h2>
-            </span>
-
-            <span class="versiculo">Venham, vamos adorar e nos prostrar,<br>
-                vamos nos ajoelhar diante do Senhor, nosso Criador. Sl. 95:6</span>
-        </div>
-    </header>
-
-    <main>
-
-        <div class="sidebar">
-
-            <span class="desc">Escala de Cultos e Aniversariantes do mês</span>
-
-            <div class="divAtalaias">
-                <h3>Atalaias</h3>
-                <div></div>
-            </div>
-
-            <div class="divInf">
-                <h3>Min. Infantil</h3>
-                <div></div>
-            </div>
-
-            <div class="divAmor">
-                <h3>Min. Amor</h3>
-                <div></div>
-            </div>
 
 
-        </div>
-
-        <div class="calendario">
-
-            <div class="info-topo">
-
-                <div class="mens"></div>
-            </div>
-
-            <table class="tabelaCalendario"></table>
-
-            <div class="info">
-
-                <div class="mens"></div>
-            </div>
-        </div>
+    <main style="display: block;">
 
 
+        <header>
+            <div class="container-titulo">
+                <h1 id="logo">Igreja Batista no PSH</h1>
+                <div>
 
-        </div>
+                    <p id="nomePastor" class="desc">
+                        <span class="material-icons">arrow_right</span>Pr. Bruno Sousa
+                    </p>
 
-        <!-- Formulário fixo -->
-        <!-- Formulário fixo -->
-        <form class="form-fixo">
-
-            <div style="text-align: center; margin-bottom: 20px;">
-                <button id="btnToggleIgreja" class="btn-igreja ativo" style="width: 280px; padding: 12px;">
-                    Igreja Batista no PSH (Clique para trocar)
-                </button>
-            </div>
-
-            <div class="selectItens">
-                <select id="selecaoMes"></select>
-                <select id="selecaoAno"></select>
-            </div>
-
-            <div class="clEdit">
-                <div class="clTopo">
-                    <label class="ESem"></label>
-                    <label class="EDia"></label>
-                </div>
-
-                <div class="edicao">
-                    <div class="corpo">
-                        <!-- NÃO coloque <form> aqui! Todos os inputs ficam diretamente aqui -->
-                        <input class="EDir" placeholder="Dirigente">
-                        <input class="EPreg" placeholder="Pregador">
-                        <input class="EProg" placeholder="Evento">
-
-                        <input class="ata1" placeholder="Atalaia 1">
-                        <input class="ata2" placeholder="Atalaia 2">
-
-                        <!-- <input class="inf1" placeholder="Prof. Infantil">
-                        <input class="inf2" placeholder="Aux. Infantil"> -->
-
-                        <input id="inputInf1" class="inf1" placeholder="Infantil 1">
-                        <input id="inputInf2" class="inf2" placeholder="Infantil 2">
-                        <input id="inputInf3" class="inf3" placeholder="Infantil 3">
-                        <input class="EAniv" placeholder="Aniversariante">
-                    </div>
                 </div>
             </div>
+            <div class="containerRight">
 
-            <div style="margin-top: 20px; text-align: center;">
-                <input id="btnRegistrar" type="button" value="Registrar Dia">
-                <input id="btnSalvarAniv" type="button" value="Salvar Aniversariante" />
-                <input id="btnLimparBD" type="button" value="Apagar Registro">
-                <input id="btnSalvar" type="button" value="Gerar PDF">
-                <input id="btnLimparTudoBD" type="button" value="Apagar Tudo">
+                <span class="ic">
+                    <span class="material-icons">calendar_today</span>
+                    <h2 class="mes"></h2>
+                </span>
+
+                <span class="versiculo">Venham, vamos adorar e nos prostrar,<br>
+                    vamos nos ajoelhar diante do Senhor, nosso Criador. Sl. 95:6</span>
+            </div>
+        </header>
+
+        <div style="display: flex;">
+
+
+            <div class="sidebar">
+
+                <span class="desc">Escala de Cultos e Aniversariantes do mês</span>
+
+                <div class="divAtalaias">
+                    <h3>Atalaias</h3>
+                    <div></div>
+                </div>
+
+                <div class="divInf">
+                    <h3>Min. Infantil</h3>
+                    <div></div>
+                </div>
+
+                <div class="divAmor">
+                    <h3>Min. Amor</h3>
+                    <div></div>
+                </div>
+
+
             </div>
 
-            <div class="sugestoes"></div>
+            <div class="calendario">
 
-        </form>
+                <div class="info-topo">
 
+                    <div class="mens"></div>
+                </div>
+
+                <table class="tabelaCalendario"></table>
+
+                <div class="info">
+
+                    <div class="mens"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+        </div>
+        
     </main>
+    <form class="form-fixo">
+
+        <div style="text-align: center; margin-bottom: 20px;">
+            <button id="btnToggleIgreja" class="btn-igreja ativo" style=" padding: 12px;">
+                Igreja Batista no PSH (Clique para trocar)
+            </button>
+        </div>
+
+        <div class="selectItens">
+            <select id="selecaoMes"></select>
+            <select id="selecaoAno"></select>
+        </div>
+
+        <div class="clEdit">
+            <div class="clTopo">
+                <label class="ESem"></label>
+                <label class="EDia"></label>
+            </div>
+
+            <div class="edicao">
+                <div class="corpo">
+                    <!-- NÃO coloque <form> aqui! Todos os inputs ficam diretamente aqui -->
+                    <input class="EDir" placeholder="Dirigente">
+                    <input class="EPreg" placeholder="Pregador">
+                    <input class="EProg" placeholder="Evento">
+
+                    <input class="ata1" placeholder="Atalaia 1">
+                    <input class="ata2" placeholder="Atalaia 2">
+
+                    <!-- <input class="inf1" placeholder="Prof. Infantil">
+                    <input class="inf2" placeholder="Aux. Infantil"> -->
+
+                    <input id="inputInf1" class="inf1" placeholder="Infantil 1">
+                    <input id="inputInf2" class="inf2" placeholder="Infantil 2">
+                    <input id="inputInf3" class="inf3" placeholder="Infantil 3">
+                    <input class="EAniv" placeholder="Aniversariante">
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <input id="btnRegistrar" type="button" value="Registrar Dia">
+            <input id="btnSalvarAniv" type="button" value="Salvar Aniversariante" />
+            <input id="btnLimparBD" type="button" value="Apagar Registro">
+            <input id="btnSalvar" type="button" value="Gerar PDF">
+            <input id="btnLimparTudoBD" type="button" value="Apagar Tudo">
+        </div>
+
+        <div class="sugestoes"></div>
+
+    </form>
 
 
 
