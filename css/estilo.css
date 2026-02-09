@@ -8,8 +8,9 @@
     width: 210mm;
     height: 148mm;
   }
-  .tutorial {
-    display: none;
+
+  .form-fixo {
+    display: none !important;
   }
 }
 
@@ -35,15 +36,10 @@ main {
   display: flex;
 }
 
-input {
-  outline: none;
-}
 
 /* Tutorial */
 .tutorial {
   margin: 40px;
-  bottom: 15px;
-  right: 15px;
   background: #f3f3f3;
   color: #000;
   padding: 40px;
@@ -61,7 +57,7 @@ input {
   background: #138a60;
   min-width: 220px;
   max-width: 220px;
-   height: 620px;
+  height: 620px;
   border-top: 1px solid #28af7b;
   padding: 15px;
   font-size: 0.65rem;
@@ -96,23 +92,11 @@ header div {
   align-items: flex-start;
 }
 
-.container-titulo p,
-.container-titulo div {
-  display: flex;
-  align-items: center;
-  /* justify-content: space-between; */
-  width: 100%;
-}
-
 .containerRight {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-}
-
-.containerLista {
-  display: flex;
 }
 
 /* Calendário */
@@ -122,7 +106,6 @@ header div {
   padding: 15px;
   width: 788px;
   position: relative;
-  display: block;
   z-index: 1;
   background: #138a60 linear-gradient(#138a60, #1b9c6f);
   border-top: 1px solid #28af7b;
@@ -155,7 +138,7 @@ header div {
   max-height: 90px;
 }
 
-/* Blocos */
+/* Blocos do calendário */
 .blocoDia,
 .blocoInvisivel,
 .topo {
@@ -214,9 +197,7 @@ header div {
   justify-content: flex-end;
 }
 
-
-
-/* Listas */
+/* Listas na sidebar */
 .divAtalaias,
 .divInf {
   color: #abffdf;
@@ -228,6 +209,10 @@ header div {
   align-items: center;
   margin-bottom: 4px;
   margin-left: -6px;
+}
+
+div.containerLista {
+  display: flex;
 }
 
 .atalaia1,
@@ -248,20 +233,13 @@ header div {
 }
 
 /* Datas de Aniversário */
-.dataNiv,
-div.dataNiv {
+.dataNiv {
   display: flex;
   align-items: center;
   border-radius: 6px;
 }
 
-div.dataNiv {
-  margin-right: 6px;
-  margin-bottom: 4px;
-}
-
 .diaAta,
-.diaAmor,
 .diaInf {
   color: #fff;
   width: 25px;
@@ -283,7 +261,7 @@ div.dataNiv {
   border-radius: 6px;
 }
 
-/* Informações */
+/* Informações (sidebar) */
 .info,
 .info-topo {
   margin-top: 20px;
@@ -308,7 +286,7 @@ div.dataNiv {
   color: #222;
 }
 
-/* Controle */
+/* Painel de edição lateral */
 .dash {
   position: absolute;
   top: 0;
@@ -322,15 +300,18 @@ div.dataNiv {
   background: #0f8159;
 }
 
-.dash input {
+input {
   width: 100%;
   height: 25px;
   font-size: 0.75rem;
   padding: 0 10px;
   border: none;
+  outline: none;
+
+  margin: 0 auto;
 }
 
-/* Formulários */
+/* Formulários no painel */
 form {
   display: flex;
   flex-direction: column;
@@ -344,11 +325,7 @@ form {
   border-radius: 3px;
 }
 
-.clEdit input {
-  width: 100%;
-  margin: 0 auto;
-  border: none;
-}
+
 
 .clTopo {
   display: flex;
@@ -387,8 +364,9 @@ select {
   margin: 5px 0;
 }
 
-/* Botões de Ação */
+/* Botões de ação */
 #btnRegistrar,
+#btnSalvarAniv,
 #btnSalvar,
 #btnLimparTudoBD,
 #btnLimparBD {
@@ -415,6 +393,7 @@ select {
 
 #btnRegistrar:hover,
 #btnSalvar:hover,
+#btnSalvarAniv:hover,
 #btnLimparTudoBD:hover,
 #btnLimparBD:hover {
   cursor: pointer;
@@ -422,7 +401,7 @@ select {
   color: #fff;
 }
 
-/* Estilos Gerais */
+/* Estilos gerais */
 .nome,
 #logo,
 .corpo span {
@@ -432,6 +411,7 @@ select {
 .nome {
   font-size: 11px;
   color: #fff;
+  cursor: pointer;
 }
 
 #logo,
@@ -443,11 +423,9 @@ select {
 }
 
 .desc,
-#subtitulo,
 .versiculo {
   color: #abffdf;
   font-size: 0.75rem;
-
 }
 
 .versiculo {
@@ -477,19 +455,11 @@ select {
   border-radius: 3px;
 }
 
-.icones img,
-.iconeBalao {
-  height: 14px;
-  width: 14px;
-  margin: 0 2px;
-}
-
 .iconesEventos ion-icon {
-    font-size: 12px;
-    margin-right: 4px;
-    color: #bc9600; /* Cor padrão do Ionic, ajuste conforme necessário */
+  font-size: 12px;
+  margin-right: 4px;
+  color: #bc9600;
 }
-
 
 #close {
   width: 18px;
@@ -518,4 +488,89 @@ select {
 .sugestoes div:hover {
   cursor: pointer;
   background: #1ca977;
+}
+
+/* Seletor de igreja */
+.seletor-igreja {
+  margin: 20px 0;
+}
+
+.btn-igreja {
+  padding: 10px 20px;
+  margin: 2px 8px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #ffffff33;
+  color: #777;
+  transition: all 0.2s;
+}
+
+.btn-igreja.ativo {
+  background: #138a6099;
+  color: #fff;
+  font-weight: bold;
+}
+
+.btn-igreja:hover {
+  background: #ffffff33;
+  color: #000;
+}
+
+/* Campo e botão de aniversariante */
+.EAniv {
+  width: 100%;
+  height: 25px;
+  padding: 0 10px;
+  border: none;
+  font-size: 0.75rem;
+  margin-top: 25px;
+}
+
+#btnSalvarAniv {
+  margin-bottom: 6px;
+  /* width: 100%;
+  height: 30px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer; */
+}
+
+#btnSalvarAniv:hover {
+  background: #45a049;
+}
+
+/* Nomes de aniversariantes (clicáveis) */
+.nome {
+  cursor: pointer;
+  text-decoration: none !important;
+  color: #abffdf;
+}
+
+.nome:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.btn-igreja {
+  padding: 12px 20px;
+  margin: 2px 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  background: #ffffff33;
+  color: #fff;
+  transition: all 0.3s;
+  font-weight: bold;
+}
+
+.btn-igreja.ativo {
+  background: #138a6099;
+  color: #fff;
 }

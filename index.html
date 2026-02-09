@@ -7,8 +7,8 @@
     <link rel="stylesheet" type="text/css" href="css/estilo.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -18,7 +18,7 @@
 
 </head>
 
-<body onload="criacaoDoDia(),carregaDados()" onchange="criacaoDoDia(),carregaDados()">
+<body>
 
 
     <header>
@@ -26,9 +26,9 @@
             <h1 id="logo">Igreja Batista no PSH</h1>
             <div>
 
-                <p class="desc"><span class="material-icons">
-                        arrow_right
-                    </span>Pr. Bruno Sousa</p>
+                <p id="nomePastor" class="desc">
+                    <span class="material-icons">arrow_right</span>Pr. Bruno Sousa
+                </p>
 
             </div>
         </div>
@@ -61,52 +61,6 @@
             </div>
 
 
-            <div class="dash">
-
-                <img id="close" src="./img/close.png" onclick="fecharEdicao()">
-
-                <div class="selectItens">
-                    <select id="selecaoMes"></select>
-                    <select id="selecaoAno"></select>
-                </div>
-
-                <div class="clEdit">
-
-                    <div class="clTopo">
-                        <label class="ESem"></label>
-                        <label class="EDia"></label>
-                    </div>
-
-                    <div class="edicao">
-                        <div class="corpo">
-                            <form>
-
-                                <input class="EDir" placeholder="Dirigente">
-                                <input class="EPreg" placeholder="Pregador">
-                                <input class="EProg" placeholder="Evento">
-
-
-                                <input class="ata1" placeholder="Atalaia">
-                                <!-- <input class="ata2" placeholder="Atalaia 02"> -->
-
-                                <input class="inf1" placeholder="Prof. Infantil">
-                                <input class="inf2" placeholder="Aux. Infantil">
-                            </form>
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-                <input id="btnRegistrar" type="button" onclick="add(), carregaDados()" value="Registrar Dia">
-                <input id="btnLimparBD" type="button" value="Apagar Registro" onclick="limparRegistro()">
-                <input id="btnSalvar" type="button" onclick="gerarPDF()" value="Gerar PDF">
-                <input style="margin-top: 14px; background-color: rgb(219, 79, 79); color: #fff" id="btnLimparTudoBD" type="button" value="Apagar Tudo" onclick="apagarTudo()">
-
-                <div class="sugestoes"></div>
-
-            </div>
         </div>
 
         <div class="calendario">
@@ -124,37 +78,85 @@
             </div>
         </div>
 
-        <div class="tutorial">
-            <div>
-                <h2>Bem-vindo ao sistema de agenda da Congregação Batista de Árvores Verdes no PSH!</h2>
-                <br/>
-                <p>Este sistema foi desenvolvido para facilitar o gerenciamento da escala de cultos e aniversariantes do mês.</p>
-                <br/>
-                <h3>Como usar:</h3>
-                <br/>
-                <ol>
-                    <li>Para adicionar ou editar informações de um dia específico, clique na célula correspondente no calendário.</li>
-                    <li>Preencha os campos necessários, como Dirigente, Pregador, Evento, Atalaias e Ministros Infantis.</li>
-                    <li>Clique em "Registrar Dia" para salvar as informações.</li>
-                    <li>Use os botões na barra lateral para gerar um PDF da agenda ou apagar registros conforme necessário.</li>
-                </ol>
-                <br/>
-                <li>As informações de aniversariantes do mês serão exibidas automaticamente.</li>
-                <li>Para salvar como PDF, ao aparecer a tela de impressão, selecione a opção "Salvar como PDF" no seu navegador.</li>
-                <li>Apagar registros antigos é fácil! Use o botão "Apagar Tudo" para remover todas as informações de uma vez.</li>
-                <li>Se houver divergências, tente usar o navegador Edge da Microsoft.</li>
-                <br/>
-                <p>Explore as funcionalidades e aproveite a praticidade do sistema!</p>
-            </div>
+
+
         </div>
+
+        <!-- Formulário fixo -->
+        <!-- Formulário fixo -->
+        <form class="form-fixo">
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <button id="btnToggleIgreja" class="btn-igreja ativo" style="width: 280px; padding: 12px;">
+                    Igreja Batista no PSH (Clique para trocar)
+                </button>
+            </div>
+
+            <div class="selectItens">
+                <select id="selecaoMes"></select>
+                <select id="selecaoAno"></select>
+            </div>
+
+            <div class="clEdit">
+                <div class="clTopo">
+                    <label class="ESem"></label>
+                    <label class="EDia"></label>
+                </div>
+
+                <div class="edicao">
+                    <div class="corpo">
+                        <!-- NÃO coloque <form> aqui! Todos os inputs ficam diretamente aqui -->
+                        <input class="EDir" placeholder="Dirigente">
+                        <input class="EPreg" placeholder="Pregador">
+                        <input class="EProg" placeholder="Evento">
+
+                        <input class="ata1" placeholder="Atalaia 1">
+                        <input class="ata2" placeholder="Atalaia 2">
+
+                        <!-- <input class="inf1" placeholder="Prof. Infantil">
+                        <input class="inf2" placeholder="Aux. Infantil"> -->
+
+                        <input id="inputInf1" class="inf1" placeholder="Prof. Infantil">
+                        <input id="inputInf2" class="inf2" placeholder="Aux. Infantil">
+                        <input class="EAniv" placeholder="Aniversariante">
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; text-align: center;">
+                <input id="btnRegistrar" type="button" value="Registrar Dia">
+                <input id="btnSalvarAniv" type="button" value="Salvar Aniversariante" />
+                <input id="btnLimparBD" type="button" value="Apagar Registro">
+                <input id="btnSalvar" type="button" value="Gerar PDF">
+                <input id="btnLimparTudoBD" type="button" value="Apagar Tudo">
+            </div>
+
+            <div class="sugestoes"></div>
+
+        </form>
 
     </main>
 
 
-    <script src="js/variaveis.js"></script>
-    <script src="js/controle.js"></script>
-    <script src="js/calendario.js"></script>
-    <script src="js/sidebar.js"></script>
+
+    <!-- Firebase (módulos) -->
+    <script type="module" src="js/firebase/firebase-config.js"></script>
+    <script type="module" src="js/firebase/firebase-ops.js"></script>
+
+    <!-- Utils e componentes -->
+    <script defer src="js/utils/variaveis.js"></script>
+    <script defer src="js/utils/helpers.js"></script>
+    <script defer src="js/components/HeaderIgreja.js"></script>
+    <script defer src="js/components/FormEdicaoDia.js"></script>
+    <script defer src="js/components/Dia.js"></script>
+    <script defer src="js/components/Calendario.js"></script>
+    <script defer src="js/components/SidebarAniversariantes.js"></script>
+    <script defer src="js/components/SidebarAtalaias.js"></script>
+    <script defer src="js/components/SidebarInfantil.js"></script>
+    <script defer src="js/utils/helpers.js"></script>
+
+    <!-- Inicialização principal -->
+    <script defer src="js/main.js"></script>
 
 </body>
 
