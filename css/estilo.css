@@ -206,19 +206,20 @@ header div {
 .atalaiasList,
 .infList {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   margin-bottom: 4px;
   margin-left: -6px;
 }
 
 div.containerLista {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .atalaia1,
 .atalaia2,
 .inf1,
-.inf2 {
+.inf2, .inf3 {
   display: flex;
   align-items: center;
   border-radius: 6px;
@@ -226,9 +227,17 @@ div.containerLista {
   padding: 4px 5px;
 }
 
+#inputInf1,
+#inputInf2, #inputInf3 {
+  border: none;
+  padding: 4px 10px;
+  outline: none;
+  width: 100%;
+}
+
 .atalaia1,
 .inf1,
-.inf2 {
+.inf2, .inf3 {
   margin-right: 3px;
 }
 

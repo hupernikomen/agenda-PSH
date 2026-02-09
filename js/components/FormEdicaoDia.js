@@ -33,13 +33,13 @@ class FormEdicaoDia {
     const progDia = await programacaoDoDia(i) || {};
 
     this.$btnRegistrar.val(
-      progDia.dir || progDia.preg || progDia.prog?.length > 0 || progDia.ata1 || progDia.ata2 || progDia.inf1 || progDia.inf2
+      progDia.dir || progDia.preg || progDia.prog?.length > 0 || progDia.ata1 || progDia.ata2 || progDia.inf1 || progDia.inf2 || progDia.inf3
         ? "Atualizar Dia"
         : "Registrar Dia"
     );
 
     this.$btnLimpar.css("display",
-      progDia.dir || progDia.preg || progDia.prog?.length > 0 || progDia.ata1 || progDia.ata2 || progDia.inf1 || progDia.inf2
+      progDia.dir || progDia.preg || progDia.prog?.length > 0 || progDia.ata1 || progDia.ata2 || progDia.inf1 || progDia.inf2 || progDia.inf3
         ? "block"
         : "none"
     );
@@ -54,6 +54,7 @@ class FormEdicaoDia {
     $(".ata2").val(progDia.ata2 || "");
     $(".inf1").val(progDia.inf1 || "");
     $(".inf2").val(progDia.inf2 || "");
+    $(".inf3").val(progDia.inf3 || "");
 
     this.$sugestoes.empty();
 
@@ -86,10 +87,10 @@ class FormEdicaoDia {
     const inputAta2 = document.querySelector('.ata2');
     const inputInf1 = document.getElementById('inputInf1');
     const inputInf2 = document.getElementById('inputInf2');
+    const inputInf3 = document.getElementById('inputInf3');
     const inputEAniv = document.querySelector('.EAniv');
 
-    console.log('Valor atual de #inputInf1:', inputInf1 ? inputInf1.value : 'não encontrado');
-    console.log('Valor atual de #inputInf2:', inputInf2 ? inputInf2.value : 'não encontrado');
+
 
     const progValue = inputEProg ? (inputEProg.value || "") : "";
     const arrProg = progValue
@@ -105,7 +106,8 @@ class FormEdicaoDia {
       ata1: inputAta1 ? (inputAta1.value || "").trim() || undefined : undefined,
       ata2: inputAta2 ? (inputAta2.value || "").trim() || undefined : undefined,
       inf1: inputInf1 ? (inputInf1.value || "").trim() : "",
-      inf2: inputInf2 ? (inputInf2.value || "").trim() : ""
+      inf2: inputInf2 ? (inputInf2.value || "").trim() : "",
+      inf3: inputInf3 ? (inputInf3.value || "").trim() : ""
     };
 
     // Remove campos undefined
@@ -117,16 +119,16 @@ class FormEdicaoDia {
 
     console.log("Dados a serem salvos:", cal);
 
-let sucesso;
+    let sucesso;
     if (Object.keys(cal).length > 2) {
-        sucesso = await window.salvarDiaNoFirestore(cal);
+      sucesso = await window.salvarDiaNoFirestore(cal);
     } else {
-        sucesso = await window.apagarDiaNoFirestore(cal.dia);
+      sucesso = await window.apagarDiaNoFirestore(cal.dia);
     }
 
     if (!sucesso) {
-        alert("Erro ao salvar. Veja o console.");
-        return;
+      alert("Erro ao salvar. Veja o console.");
+      return;
     }
 
     // Atualização seletiva: só recarrega o dia alterado + sidebar de aniversariantes
@@ -146,19 +148,19 @@ let sucesso;
     // Atualiza o elemento já existente no DOM
     const tdExistente = document.querySelector(`td.${semana} #${semana}${diaNum}`);
     if (tdExistente) {
-        tdExistente.innerHTML = ''; // limpa
-        tdExistente.appendChild(diaObj.elemento);
-        await diaObj.atualizar(progDia, aniversariantesDoDia);
+      tdExistente.innerHTML = ''; // limpa
+      tdExistente.appendChild(diaObj.elemento);
+      await diaObj.atualizar(progDia, aniversariantesDoDia);
     } else {
-        console.warn("Não encontrou o TD do dia para atualização seletiva");
-        // fallback: atualiza tudo (pode manter como estava)
-        await window.calendario.renderizar();
+      console.warn("Não encontrou o TD do dia para atualização seletiva");
+      // fallback: atualiza tudo (pode manter como estava)
+      await window.calendario.renderizar();
     }
 
     // Atualiza apenas a parte de aniversariantes (mais rápida que calendário inteiro)
     await window.calendario.atualizarSidebarAniversariantes(
-        vr.diasDaSem.indexOf(vr.diasDaSem[descobreDia(1)]),
-        aniversariantes
+      vr.diasDaSem.indexOf(vr.diasDaSem[descobreDia(1)]),
+      aniversariantes
     );
 
     // Atualiza as outras sidebars se necessário (são mais leves)
@@ -166,10 +168,10 @@ let sucesso;
     if (window.sidebarInfantil) await window.sidebarInfantil.renderizar();
 
     // Opcional: limpar campos
-    $(".EDir, .EPreg, .EProg, .ata1, .ata2, .inf1, .inf2, .EAniv").val("");
+    $(".EDir, .EPreg, .EProg, .ata1, .ata2, .inf1, .inf2, .inf3, .EAniv").val("");
     this.$btnLimpar.css("display", "none");
     this.$btnRegistrar.val("Registrar Dia");
-}
+  }
 
   bindEvents() {
     // Botão Registrar Dia

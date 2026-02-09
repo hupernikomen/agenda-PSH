@@ -67,7 +67,7 @@ class Calendario {
       }
 
       // Prepara atualização assíncrona (não await aqui ainda)
-      const progDia = progMes[i] || { prog: [], dir: "", preg: "", ata1: "", ata2: "", inf1: "", inf2: "" };
+      const progDia = progMes[i] || { prog: [], dir: "", preg: "", ata1: "", ata2: "", inf1: "", inf2: "", inf3: "" };
       const aniversariantesDoDia = aniversariantes[i] || [];
       promisesAtualizacao.push(diaObj.atualizar(progDia, aniversariantesDoDia));
     }

@@ -34,6 +34,7 @@ class SidebarInfantil {
 
       if (prog.inf1?.trim()) itens.push(prog.inf1.trim());
       if (prog.inf2?.trim()) itens.push(prog.inf2.trim());
+      if (prog.inf3?.trim()) itens.push(prog.inf3.trim());
 
       if (itens.length > 0) {
         const linha = this.criarLinha(dia, itens);
