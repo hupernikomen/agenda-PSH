@@ -7,7 +7,6 @@ class SidebarInfantil {
 
   async renderizar() {
     if (!this.$container.length) {
-      console.warn("Container .divInf div não encontrado");
       return;
     }
 
@@ -21,7 +20,6 @@ class SidebarInfantil {
 
     // Se não houver dados, mostra mensagem
     if (Object.keys(progMes).length === 0) {
-      this.$container.append('<p style="color: #abffdf; font-size: 0.8rem;">Nenhum ministério infantil registrado.</p>');
       return;
     }
 
@@ -32,9 +30,9 @@ class SidebarInfantil {
       const prog = progMes[dia] || {};
       const itens = [];
 
-      if (prog.inf1?.trim()) itens.push(prog.inf1.trim());
-      if (prog.inf2?.trim()) itens.push(prog.inf2.trim());
-      if (prog.inf3?.trim()) itens.push(prog.inf3.trim());
+      if (prog.inputInf1?.trim()) itens.push(prog.inputInf1.trim());
+      if (prog.inputInf2?.trim()) itens.push(prog.inputInf2.trim());
+      if (prog.inputInf3?.trim()) itens.push(prog.inputInf3.trim());
 
       if (itens.length > 0) {
         const linha = this.criarLinha(dia, itens);

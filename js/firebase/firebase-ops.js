@@ -47,10 +47,10 @@ window.programacaoDoDia = async function (dia) {
     const colecao = getColecaoAgenda();
     const docRef = doc(collection(db, colecao), String(dia));
     const snap = await getDoc(docRef);
-    return snap.exists() ? snap.data() : { prog: [], dir: "", preg: "", ata1: "", ata2: "", inf1: "", inf2: "" };
+    return snap.exists() ? snap.data() : { prog: [], dir: "", preg: "", ata1: "", ata2: "", inputInf1: "", inputInf2: "", inputInf3: "", amor: "" };
   } catch (err) {
     console.error(`Erro ao buscar dia ${dia}:`, err);
-    return { prog: [], dir: "", preg: "", ata1: "", ata2: "", inf1: "", inf2: "" };
+    return { prog: [], dir: "", preg: "", ata1: "", ata2: "", inputInf1: "", inputInf2: "", inputInf3: "", amor: "" };
   }
 };
 
@@ -176,20 +176,16 @@ window.buscarProgramacaoDoMes = async function (mes, ano) {
   const colecao = getColecaoAgenda();
   const programacao = {};
 
-  try {
-    const querySnapshot = await getDocs(collection(db, colecao));
-    querySnapshot.forEach(docSnap => {
-      const data = docSnap.data();
-      // Verifica se o documento é do mês e ano atual
-      if (data.mes === parseInt(mes) && data.ano === parseInt(ano)) {
-        const dia = parseInt(docSnap.id);
-        programacao[dia] = data;
-      }
-    });
-    console.log(`Programação do mês ${mes}/${ano} carregada: ${Object.keys(programacao).length} dias`);
-    return programacao;
-  } catch (err) {
-    console.error("Erro ao buscar programação do mês:", err);
-    return {};
-  }
+  const querySnapshot = await getDocs(collection(db, colecao));
+  querySnapshot.forEach(docSnap => {
+    const data = docSnap.data();
+    console.log("Documento raw do Firestore:", docSnap.id, data);  // ← log raw
+
+    if (data.mes === parseInt(mes) && data.ano === parseInt(ano)) {
+      const dia = parseInt(docSnap.id);
+      programacao[dia] = data;
+    }
+  });
+
+  return programacao;
 };

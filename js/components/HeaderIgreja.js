@@ -34,13 +34,13 @@ class HeaderIgreja {
     if (this.isIgreja1) {
       window.colecaoAtual = 'agenda-igreja1';
       localStorage.setItem('igrejaAtual', 'agenda-igreja1');  // Salva no localStorage
-      this.$btnToggle.text('Igreja Batista no PSH');
+      // this.$btnToggle.text('PSH');
       this.$logo.text('Igreja Batista no PSH');
       this.$nomePastor.html('<span class="material-icons">arrow_right</span>Pr. Bruno Sousa');
     } else {
       window.colecaoAtual = 'agenda-igreja2';
       localStorage.setItem('igrejaAtual', 'agenda-igreja2');  // Salva no localStorage
-      this.$btnToggle.text('Igreja Batista em Árvores Verdes');
+      // this.$btnToggle.text('Verdes');
       this.$logo.text('Igreja Batista em Árvores Verdes');
       this.$nomePastor.html('<span class="material-icons">arrow_right</span>Pr. Raimundo Pereira');
     }
@@ -54,6 +54,7 @@ class HeaderIgreja {
       $('.tabelaCalendario').empty();
       $('.divAtalaias div').empty();
       $('.divInf div').empty();
+      $('.divAmor div').empty();
       $('.info .mens, .info-topo .mens').empty();
 
       await new Promise(resolve => setTimeout(resolve, 100));  // pequeno delay para DOM atualizar
@@ -61,6 +62,7 @@ class HeaderIgreja {
       if (window.calendario) await window.calendario.renderizar();
       if (window.sidebarAtalaias) await window.sidebarAtalaias.renderizar();
       if (window.sidebarInfantil) await window.sidebarInfantil.renderizar();
+      if (window.sidebarAmor) await window.sidebarAmor.renderizar();
       if (window.sidebarAniversariantes) await window.sidebarAniversariantes.renderizar();
       if (window.atualizarIconesAniversariantes) await window.atualizarIconesAniversariantes();
 

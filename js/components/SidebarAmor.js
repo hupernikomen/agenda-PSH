@@ -1,38 +1,36 @@
-// js/components/SidebarAtalaias.js - Otimizado para velocidade
+// js/components/SidebarAmor.js - Componente da lista de Min. Amor na sidebar
 
-class SidebarAtalaias {
+class SidebarAmor {
   constructor() {
-    this.$container = $('.divAtalaias div');
+    this.$section = $('.divAmor');     // a div pai inteira
+    this.$container = $('.divAmor div');
   }
 
   async renderizar() {
+
     if (!this.$container.length) {
-      console.warn("Container .divAtalaias div não encontrado");
       return;
     }
+
 
     this.$container.empty();
 
     const mes = selectMes();
     const ano = selectAno();
 
-    // Carrega TODA a programação do mês de uma vez (batch)
     const progMes = await window.buscarProgramacaoDoMes?.(mes, ano) || {};
 
-    // Se não houver dados, mostra mensagem
-    if (Object.keys(progMes).length === 0) {
-      return;
-    }
-
-    // Constrói tudo em memória com DocumentFragment (muito mais rápido)
+    let encontrou = false;
     const fragment = document.createDocumentFragment();
 
     for (let dia = 1; dia <= UltimoDiaDoMes(mes, ano); dia++) {
       const prog = progMes[dia] || {};
-      const itens = [];
 
-      if (prog.ata1?.trim()) itens.push(prog.ata1.trim());
-      if (prog.ata2?.trim()) itens.push(prog.ata2.trim());
+      const itens = [];
+      if (prog.amor && prog.amor.trim()) {
+        itens.push(prog.amor.trim());
+        encontrou = true;
+      }
 
       if (itens.length > 0) {
         const linha = this.criarLinha(dia, itens);
@@ -40,16 +38,20 @@ class SidebarAtalaias {
       }
     }
 
-    // Insere tudo de uma única vez no DOM
+    if (!encontrou) {
+      this.$container.append('<p style="color: orange;">Nenhum Amor neste mês (mas dados existem no banco)</p>');
+    }
+
+    this.$container.empty();  // limpa a mensagem de carregando
     this.$container.append(fragment);
   }
 
   criarLinha(dia, itens) {
     const linha = document.createElement('div');
-    linha.className = 'atalaiasList';
+    linha.className = 'amorList';
 
     const diaEl = document.createElement('div');
-    diaEl.className = 'diaAta';
+    diaEl.className = 'diaAmor';
     diaEl.textContent = dia;
 
     const containerItens = document.createElement('div');
@@ -57,17 +59,16 @@ class SidebarAtalaias {
 
     itens.forEach((item, idx) => {
       const span = document.createElement('span');
-      span.className = 'atalaia' + (idx + 1);
+      span.className = 'amor' + (idx + 1);
       span.textContent = item;
       containerItens.appendChild(span);
     });
 
     linha.appendChild(diaEl);
     linha.appendChild(containerItens);
-
     return linha;
   }
 }
 
 // Instancia globalmente
-window.sidebarAtalaias = new SidebarAtalaias();
+window.sidebarAmor = new SidebarAmor();

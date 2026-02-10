@@ -33,13 +33,13 @@ class FormEdicaoDia {
     const progDia = await programacaoDoDia(i) || {};
 
     this.$btnRegistrar.val(
-      progDia.dir || progDia.preg || progDia.prog?.length > 0 || progDia.ata1 || progDia.ata2 || progDia.inf1 || progDia.inf2 || progDia.inf3
+      progDia.dir || progDia.preg || progDia.prog?.length > 0 || progDia.ata1 || progDia.ata2 || progDia.inputInf1 || progDia.inputInf2 || progDia.inputInf3 || progDia.amor
         ? "Atualizar Dia"
         : "Registrar Dia"
     );
 
     this.$btnLimpar.css("display",
-      progDia.dir || progDia.preg || progDia.prog?.length > 0 || progDia.ata1 || progDia.ata2 || progDia.inf1 || progDia.inf2 || progDia.inf3
+      progDia.dir || progDia.preg || progDia.prog?.length > 0 || progDia.ata1 || progDia.ata2 || progDia.inputInf1 || progDia.inputInf2 || progDia.inputInf3 || progDia.amor
         ? "block"
         : "none"
     );
@@ -52,9 +52,10 @@ class FormEdicaoDia {
     $(".EPreg").val(progDia.preg || "");
     $(".ata1").val(progDia.ata1 || "");
     $(".ata2").val(progDia.ata2 || "");
-    $(".inf1").val(progDia.inf1 || "");
-    $(".inf2").val(progDia.inf2 || "");
-    $(".inf3").val(progDia.inf3 || "");
+    $("#inputInf1").val(progDia.inputInf1 || "");
+    $("#inputInf2").val(progDia.inputInf2 || "");
+    $("#inputInf3").val(progDia.inputInf3 || "");
+    $("#amor").val(progDia.amor || "");
 
     this.$sugestoes.empty();
 
@@ -68,7 +69,6 @@ class FormEdicaoDia {
   }
 
   async salvar() {
-    console.log('Tentando salvar dia...');
 
     // Captura do dia e semana (já funcionando)
     const dia = $(".EDia").text().trim() || "";
@@ -88,7 +88,7 @@ class FormEdicaoDia {
     const inputInf1 = document.getElementById('inputInf1');
     const inputInf2 = document.getElementById('inputInf2');
     const inputInf3 = document.getElementById('inputInf3');
-    const inputEAniv = document.querySelector('.EAniv');
+    const amor = document.getElementById('amor');
 
 
 
@@ -101,13 +101,14 @@ class FormEdicaoDia {
       dia: dia,
       sem: sem || undefined,
       prog: arrProg.length ? arrProg : undefined,
-      dir: inputEDir ? (inputEDir.value || "").trim() || undefined : undefined,
-      preg: inputEPreg ? (inputEPreg.value || "").trim() || undefined : undefined,
-      ata1: inputAta1 ? (inputAta1.value || "").trim() || undefined : undefined,
-      ata2: inputAta2 ? (inputAta2.value || "").trim() || undefined : undefined,
-      inf1: inputInf1 ? (inputInf1.value || "").trim() : "",
-      inf2: inputInf2 ? (inputInf2.value || "").trim() : "",
-      inf3: inputInf3 ? (inputInf3.value || "").trim() : ""
+      dir: inputEDir ? (inputEDir.value || "").trim() || "" : "",
+      preg: inputEPreg ? (inputEPreg.value || "").trim() || "" : "",
+      ata1: inputAta1 ? (inputAta1.value || "").trim() || "" : "",
+      ata2: inputAta2 ? (inputAta2.value || "").trim() || "" : "",
+      inputInf1: inputInf1 ? (inputInf1.value || "").trim() || "": "",
+      inputInf2: inputInf2 ? (inputInf2.value || "").trim() || "": "",
+      inputInf3: inputInf3 ? (inputInf3.value || "").trim() || "" : "",
+      amor: amor ? (amor.value || "").trim() || "" : "", 
     };
 
     // Remove campos undefined
@@ -117,7 +118,6 @@ class FormEdicaoDia {
       }
     });
 
-    console.log("Dados a serem salvos:", cal);
 
     let sucesso;
     if (Object.keys(cal).length > 2) {
@@ -166,9 +166,10 @@ class FormEdicaoDia {
     // Atualiza as outras sidebars se necessário (são mais leves)
     if (window.sidebarAtalaias) await window.sidebarAtalaias.renderizar();
     if (window.sidebarInfantil) await window.sidebarInfantil.renderizar();
+    if (window.sidebarAmor) await window.sidebarAmor.renderizar();
 
     // Opcional: limpar campos
-    $(".EDir, .EPreg, .EProg, .ata1, .ata2, .inf1, .inf2, .inf3, .EAniv").val("");
+    $(".EDir, .EPreg, .EProg, .ata1, .ata2, #inputInf1, #inputInf2, #inputInf3, #amor, .EAniv").val("");
     this.$btnLimpar.css("display", "none");
     this.$btnRegistrar.val("Registrar Dia");
   }

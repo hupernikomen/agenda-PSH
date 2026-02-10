@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (window.sidebarAniversariantes) await window.sidebarAniversariantes.renderizar();
     if (window.sidebarAtalaias) await window.sidebarAtalaias.renderizar();
     if (window.sidebarInfantil) await window.sidebarInfantil.renderizar();
+    if (window.sidebarAmor) await window.sidebarAmor.renderizar();
 
     // Atualiza ícones de aniversariantes (se ainda tiver)
     if (window.atualizarIconesAniversariantes) await window.atualizarIconesAniversariantes();

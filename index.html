@@ -28,7 +28,12 @@
 
         <header>
             <div class="container-titulo">
-                <h1 id="logo">Igreja Batista no PSH</h1>
+                <div style="display: flex; align-items: center;">
+                    <h1 id="logo">Igreja Batista no PSH</h1>
+                    <button id="btnToggleIgreja" class="btn-igreja ativo" style=" padding: 12px;">
+                        <span class="material-icons">loop</span>
+                    </button>
+                </div>
                 <div>
 
                     <p id="nomePastor" class="desc">
@@ -54,7 +59,6 @@
 
             <div class="sidebar">
 
-                <span class="desc">Escala de Cultos e Aniversariantes do mês</span>
 
                 <div class="divAtalaias">
                     <h3>Atalaias</h3>
@@ -93,15 +97,15 @@
 
 
         </div>
-        
+
     </main>
     <form class="form-fixo">
 
-        <div style="text-align: center; margin-bottom: 20px;">
+        <!-- <div style="text-align: center; margin-bottom: 20px;">
             <button id="btnToggleIgreja" class="btn-igreja ativo" style=" padding: 12px;">
                 Igreja Batista no PSH (Clique para trocar)
             </button>
-        </div>
+        </div> -->
 
         <div class="selectItens">
             <select id="selecaoMes"></select>
@@ -127,9 +131,11 @@
                     <!-- <input class="inf1" placeholder="Prof. Infantil">
                     <input class="inf2" placeholder="Aux. Infantil"> -->
 
-                    <input id="inputInf1" class="inf1" placeholder="Infantil 1">
-                    <input id="inputInf2" class="inf2" placeholder="Infantil 2">
-                    <input id="inputInf3" class="inf3" placeholder="Infantil 3">
+                    <input id="inputInf1"  placeholder="Infantil 1">
+                    <input id="inputInf2"  placeholder="Infantil 2">
+                    <input id="inputInf3"  placeholder="Infantil 3">
+
+                    <input id="amor" placeholder="Amor">
                     <input class="EAniv" placeholder="Aniversariante">
                 </div>
             </div>
@@ -163,6 +169,7 @@
     <script defer src="js/components/SidebarAniversariantes.js"></script>
     <script defer src="js/components/SidebarAtalaias.js"></script>
     <script defer src="js/components/SidebarInfantil.js"></script>
+    <script defer src="js/components/SidebarAmor.js"></script>
     <script defer src="js/utils/helpers.js"></script>
 
     <!-- Inicialização principal -->
