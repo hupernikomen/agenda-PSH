@@ -74,13 +74,13 @@ class FormEdicaoDia {
 
     this.$sugestoes.empty();
 
+    $('.form-fixo').addClass('visivel');
+
     // Mostra inputs de atalaias apenas no domingo
     if (this.descobreDia(i) === 0) {  // ← usa interna
       $(".clTopo").css({ backgroundColor: "#eb4f4f", color: "#fff" });
-      // $(".atalaiasInput").show();  // ← comentado porque não existe no HTML atual
     } else {
       $(".clTopo").css({ backgroundColor: "#f0f0f0", color: "#222" });
-      // $(".atalaiasInput").hide();
     }
   }
 
@@ -174,6 +174,7 @@ class FormEdicaoDia {
     $(".EDir, .EPreg, .EProg, .ata1, .ata2, #inputInf1, #inputInf2, #inputInf3, #amor, .EAniv").val("");
     this.$btnLimpar.css("display", "none");
     this.$btnRegistrar.val("Registrar Dia");
+    $('.form-fixo').removeClass('visivel');
   }
 
   bindEvents() {
@@ -205,44 +206,74 @@ class FormEdicaoDia {
       }
     });
 
-    // Sugestões nos inputs
-    document.querySelectorAll(".corpo input").forEach(input => {
-      input.addEventListener('focusin', () => {
-        const sugestoes = this.$sugestoes;
-        sugestoes.empty();
+    // Sugestões nos inputs - abordagem com delegação de evento
+this.$sugestoes.on('click', 'div', function () {
+  const valor = $(this).text();
+  const targetClass = $(this).data('target');  // classe do input alvo
 
-        const className = input.className;
+  if (targetClass) {
+    $(`.${targetClass}`).val(valor);  // preenche o input correto
+  }
 
-        if (className === 'EProg') {
-          vr.eventos.forEach(item => {
-            const el = document.createElement('div');
-            el.textContent = item;
-            el.style.cursor = 'pointer';
-            el.addEventListener('click', () => {
-              $(".EProg").val(item);
-              sugestoes.empty();
-            });
-            sugestoes.append(el);
-          });
-          return;
-        }
+  this.$sugestoes.empty();  // limpa sugestões
+});
 
-        if (className === 'EPreg') {
-          vr.pastores.forEach(item => {
-            const el = document.createElement('div');
-            el.textContent = item;
-            el.style.cursor = 'pointer';
-            el.addEventListener('click', () => {
-              $(".EPreg").val(item);
-              sugestoes.empty();
-            });
-            sugestoes.append(el);
-          });
-        }
+// Sugestões nos inputs - versão sem focusout (clique limpa tudo)
+document.querySelectorAll(".corpo input").forEach(input => {
+  input.addEventListener('focusin', () => {
+    const sugestoes = this.$sugestoes;
+    sugestoes.empty();
+
+    const className = input.className.trim();
+
+    if (className === 'EProg') {
+      vr.eventos.forEach(item => {
+        const el = document.createElement('div');
+        el.textContent = item;
+        el.style.cursor = 'pointer';
+        el.style.padding = '6px 12px';
+        el.style.borderRadius = '6px';
+        el.style.margin = '4px';
+        el.style.background = '#f0f0f0';
+        el.style.userSelect = 'none'; // evita seleção de texto ao clicar
+
+        el.addEventListener('click', () => {
+          input.value = item;           // preenche o input
+          sugestoes.empty();            // limpa sugestões imediatamente
+          input.focus();                // mantém o cursor no campo
+        });
+
+        sugestoes.append(el);
       });
+      return;
+    }
 
-      input.addEventListener('focusout', () => this.$sugestoes.empty());
-    });
+    if (className === 'EPreg') {
+      vr.pastores.forEach(item => {
+        const el = document.createElement('div');
+        el.textContent = item;
+        el.style.cursor = 'pointer';
+        el.style.padding = '6px 12px';
+        el.style.borderRadius = '6px';
+        el.style.margin = '4px';
+        el.style.background = '#f0f0f0';
+        el.style.userSelect = 'none';
+
+        el.addEventListener('click', () => {
+          input.value = item;
+          sugestoes.empty();
+          input.focus();
+        });
+
+        sugestoes.append(el);
+      });
+      return;
+    }
+  });
+
+  // REMOVIDO o focusout completamente - o clique na sugestão já limpa
+  // Se quiser limpar ao clicar fora, podemos adicionar listener no document depois
+});
   }
 }
 
