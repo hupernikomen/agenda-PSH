@@ -12,54 +12,41 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script src="js/auxiliar.js"></script>
-
     <title>Agenda PSH</title>
-
 </head>
 
 <body>
 
-
-
-
-    <main style="display: block;">
-
+    <main>
 
         <header>
             <div class="container-titulo">
                 <div style="display: flex; align-items: center;">
                     <h1 id="logo">Igreja Batista no PSH</h1>
-                    <button id="btnToggleIgreja" class="btn-igreja ativo" style=" padding: 12px;">
+                    <button id="btnToggleIgreja" class="btn-igreja ativo" style="padding: 12px;">
                         <span class="material-icons">loop</span>
                     </button>
                 </div>
                 <div>
-
                     <p id="nomePastor" class="desc">
                         <span class="material-icons">arrow_right</span>Pr. Bruno Sousa
                     </p>
-
                 </div>
             </div>
             <div class="containerRight">
-
                 <span class="ic">
                     <span class="material-icons">calendar_today</span>
                     <h2 class="mes"></h2>
                 </span>
-
-                <span class="versiculo">Venham, vamos adorar e nos prostrar,<br>
-                    vamos nos ajoelhar diante do Senhor, nosso Criador. Sl. 95:6</span>
+                <span class="versiculo">
+                    Venham, vamos adorar e nos prostrar,<br>
+                    vamos nos ajoelhar diante do Senhor, nosso Criador. Sl. 95:6
+                </span>
             </div>
         </header>
 
         <div style="display: flex;">
-
-
             <div class="sidebar">
-
-
                 <div class="divAtalaias">
                     <h3>Atalaias</h3>
                     <div></div>
@@ -74,94 +61,69 @@
                     <h3>Min. Amor</h3>
                     <div></div>
                 </div>
-
-
             </div>
 
             <div class="calendario">
-
                 <div class="info-topo">
-
                     <div class="mens"></div>
                 </div>
 
                 <table class="tabelaCalendario"></table>
 
                 <div class="info">
-
                     <div class="mens"></div>
                 </div>
             </div>
         </div>
 
-
-
-        </div>
-
     </main>
+
     <form class="form-fixo">
+        <div>
+            <div class="selectItens">
+                <select id="selecaoMes"></select>
+                <select id="selecaoAno"></select>
+            </div>
 
-        <!-- <div style="text-align: center; margin-bottom: 20px;">
-            <button id="btnToggleIgreja" class="btn-igreja ativo" style=" padding: 12px;">
-                Igreja Batista no PSH (Clique para trocar)
-            </button>
-        </div> -->
-
-        <div class="selectItens">
-            <select id="selecaoMes"></select>
-            <select id="selecaoAno"></select>
-        </div>
-
-        <div class="clEdit">
             <div class="clTopo">
                 <label class="ESem"></label>
                 <label class="EDia"></label>
             </div>
 
-            <div class="edicao">
-                <div class="corpo">
-                    <!-- NÃO coloque <form> aqui! Todos os inputs ficam diretamente aqui -->
-                    <input class="EDir" placeholder="Dirigente">
-                    <input class="EPreg" placeholder="Pregador">
-                    <input class="EProg" placeholder="Evento">
-
-                    <input class="ata1" placeholder="Atalaia 1">
-                    <input class="ata2" placeholder="Atalaia 2">
-
-                    <!-- <input class="inf1" placeholder="Prof. Infantil">
-                    <input class="inf2" placeholder="Aux. Infantil"> -->
-
-                    <input id="inputInf1"  placeholder="Infantil 1">
-                    <input id="inputInf2"  placeholder="Infantil 2">
-                    <input id="inputInf3"  placeholder="Infantil 3">
-
-                    <input id="amor" placeholder="Amor">
-                    <input class="EAniv" placeholder="Aniversariante">
-                </div>
+            <div class="corpo">
+                <input class="EDir" placeholder="Dirigente">
+                <input class="EPreg" placeholder="Pregador">
+                <input class="EProg" placeholder="Evento">
+                <input class="ata1" placeholder="Atalaia 1">
+                <input class="ata2" placeholder="Atalaia 2">
+                <input id="inputInf1" placeholder="Infantil 1">
+                <input id="inputInf2" placeholder="Infantil 2">
+                <input id="inputInf3" placeholder="Infantil 3">
+                <input id="amor" placeholder="Amor">
+                <input class="EAniv" placeholder="Aniversariante">
             </div>
+
+            <div style="margin-top: 20px; text-align: center;">
+                <input id="btnRegistrar" type="button" value="Registrar Dia">
+                <input id="btnSalvarAniv" type="button" value="Salvar Aniversariante">
+                <input id="btnLimparBD" type="button" value="Apagar Registro">
+                <input id="btnSalvar" type="button" value="Gerar PDF">
+                <input id="btnLimparTudoBD" type="button" value="Apagar Tudo">
+            </div>
+
+            <div class="sugestoes"></div>
         </div>
-
-        <div style="margin-top: 20px; text-align: center;">
-            <input id="btnRegistrar" type="button" value="Registrar Dia">
-            <input id="btnSalvarAniv" type="button" value="Salvar Aniversariante" />
-            <input id="btnLimparBD" type="button" value="Apagar Registro">
-            <input id="btnSalvar" type="button" value="Gerar PDF">
-            <input id="btnLimparTudoBD" type="button" value="Apagar Tudo">
-        </div>
-
-        <div class="sugestoes"></div>
-
     </form>
 
-
-
-    <!-- Firebase (módulos) -->
+    <!-- Firebase -->
     <script type="module" src="js/firebase/firebase-config.js"></script>
     <script type="module" src="js/firebase/firebase-ops.js"></script>
 
-    <!-- Utils e componentes -->
+    <!-- Utils -->
     <script defer src="js/utils/variaveis.js"></script>
     <script defer src="js/utils/helpers.js"></script>
+
+    <!-- Componentes -->
     <script defer src="js/components/HeaderIgreja.js"></script>
     <script defer src="js/components/FormEdicaoDia.js"></script>
     <script defer src="js/components/Dia.js"></script>
@@ -170,11 +132,9 @@
     <script defer src="js/components/SidebarAtalaias.js"></script>
     <script defer src="js/components/SidebarInfantil.js"></script>
     <script defer src="js/components/SidebarAmor.js"></script>
-    <script defer src="js/utils/helpers.js"></script>
 
-    <!-- Inicialização principal -->
+    <!-- Inicialização -->
     <script defer src="js/main.js"></script>
 
 </body>
-
 </html>

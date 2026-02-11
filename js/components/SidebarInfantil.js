@@ -1,12 +1,19 @@
-// js/components/SidebarInfantil.js - Otimizado para velocidade
+// js/components/SidebarInfantil.js - Lista de Ministério Infantil na sidebar
 
 class SidebarInfantil {
   constructor() {
-    this.$container = $('.divInf div');
+    this.$section = $('.divInf');          // div pai completa (título + conteúdo)
+    this.$container = $('.divInf div');    // container dos itens
+  }
+
+  // Função auxiliar interna: último dia do mês
+  UltimoDiaDoMes(mes = selectMes(), ano = selectAno()) {
+    return new Date(ano, mes, 0).getDate();
   }
 
   async renderizar() {
     if (!this.$container.length) {
+      console.warn("Container .divInf div não encontrado");
       return;
     }
 
@@ -15,18 +22,13 @@ class SidebarInfantil {
     const mes = selectMes();
     const ano = selectAno();
 
-    // Carrega TODA a programação do mês de uma vez (batch)
     const progMes = await window.buscarProgramacaoDoMes?.(mes, ano) || {};
 
-    // Se não houver dados, mostra mensagem
-    if (Object.keys(progMes).length === 0) {
-      return;
-    }
-
-    // Constrói tudo em memória com DocumentFragment (muito mais rápido)
     const fragment = document.createDocumentFragment();
+    let encontrou = false;
 
-    for (let dia = 1; dia <= UltimoDiaDoMes(mes, ano); dia++) {
+    // Usa a versão interna do método
+    for (let dia = 1; dia <= this.UltimoDiaDoMes(mes, ano); dia++) {
       const prog = progMes[dia] || {};
       const itens = [];
 
@@ -35,13 +37,21 @@ class SidebarInfantil {
       if (prog.inputInf3?.trim()) itens.push(prog.inputInf3.trim());
 
       if (itens.length > 0) {
+        encontrou = true;
         const linha = this.criarLinha(dia, itens);
         fragment.appendChild(linha);
       }
     }
 
-    // Insere tudo de uma única vez no DOM
+    // Insere os itens encontrados
     this.$container.append(fragment);
+
+    // Esconde a seção inteira se não houver nenhum registro de Infantil no mês
+    if (encontrou) {
+      this.$section.show();
+    } else {
+      this.$section.hide();
+    }
   }
 
   criarLinha(dia, itens) {

@@ -1,17 +1,21 @@
-// js/components/SidebarAmor.js - Componente da lista de Min. Amor na sidebar
+// js/components/SidebarAmor.js - Lista de Ministério Amor na sidebar
 
 class SidebarAmor {
   constructor() {
-    this.$section = $('.divAmor');     // a div pai inteira
-    this.$container = $('.divAmor div');
+    this.$section = $('.divAmor');          // div pai completa (título + conteúdo)
+    this.$container = $('.divAmor div');    // container dos itens
+  }
+
+  // Função auxiliar interna: último dia do mês
+  UltimoDiaDoMes(mes = selectMes(), ano = selectAno()) {
+    return new Date(ano, mes, 0).getDate();
   }
 
   async renderizar() {
-
     if (!this.$container.length) {
+      console.warn("Container .divAmor div não encontrado");
       return;
     }
-
 
     this.$container.empty();
 
@@ -20,30 +24,32 @@ class SidebarAmor {
 
     const progMes = await window.buscarProgramacaoDoMes?.(mes, ano) || {};
 
-    let encontrou = false;
     const fragment = document.createDocumentFragment();
+    let encontrou = false;
 
-    for (let dia = 1; dia <= UltimoDiaDoMes(mes, ano); dia++) {
+    // Usa a versão interna do método
+    for (let dia = 1; dia <= this.UltimoDiaDoMes(mes, ano); dia++) {
       const prog = progMes[dia] || {};
-
       const itens = [];
-      if (prog.amor && prog.amor.trim()) {
-        itens.push(prog.amor.trim());
-        encontrou = true;
-      }
+
+      if (prog.amor?.trim()) itens.push(prog.amor.trim());
 
       if (itens.length > 0) {
+        encontrou = true;
         const linha = this.criarLinha(dia, itens);
         fragment.appendChild(linha);
       }
     }
 
-    if (!encontrou) {
-      this.$container.append('<p style="color: orange;">Nenhum Amor neste mês (mas dados existem no banco)</p>');
-    }
-
-    this.$container.empty();  // limpa a mensagem de carregando
+    // Insere os itens encontrados
     this.$container.append(fragment);
+
+    // Esconde a seção inteira se não houver nenhum registro de Amor no mês
+    if (encontrou) {
+      this.$section.show();
+    } else {
+      this.$section.hide();
+    }
   }
 
   criarLinha(dia, itens) {
@@ -66,6 +72,7 @@ class SidebarAmor {
 
     linha.appendChild(diaEl);
     linha.appendChild(containerItens);
+
     return linha;
   }
 }

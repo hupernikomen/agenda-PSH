@@ -1,9 +1,19 @@
-// js/components/Calendario.js - Componente que cria e gerencia toda a tabela do calendário
+// js/components/Calendario.js - Componente que cria e gerencia a tabela do calendário
 
 class Calendario {
   constructor() {
     this.$tabela = $('.tabelaCalendario');
     this.$mes = $('.mes');
+  }
+
+  // Função auxiliar interna: dia da semana (0=dom, 1=seg, ..., 6=sáb)
+  descobreDia(dia, mes = selectMes(), ano = selectAno()) {
+    return new Date(ano, mes - 1, dia).getDay();
+  }
+
+  // Função auxiliar interna: último dia do mês
+  UltimoDiaDoMes(mes = selectMes(), ano = selectAno()) {
+    return new Date(ano, mes, 0).getDate();
   }
 
   async renderizar() {
@@ -17,12 +27,12 @@ class Calendario {
 
     const mes = selectMes();
     const ano = selectAno();
-    const primeiroDia = vr.diasDaSem.indexOf(vr.diasDaSem[descobreDia(1, mes, ano)]);
+    const primeiroDia = this.descobreDia(1, mes, ano);  // ← usa a versão interna
 
     // Atualiza título do mês
-    this.$mes.html(mes ? vr.meses[mes - 1] : "-");
+    this.$mes.html(vr.meses[mes - 1] || "-");
 
-    // Cria linha de cabeçalho
+    // Cabeçalho da tabela (dias da semana)
     const trHeader = document.createElement('tr');
     vr.diasDaSem.forEach(diaSem => {
       const td = document.createElement('td');
@@ -31,11 +41,11 @@ class Calendario {
     });
     tabela.append(trHeader);
 
-    // Cria linhas de dias
+    // Linha inicial
     let trAtual = document.createElement('tr');
     tabela.append(trAtual);
 
-    // Blocos invisíveis do início do mês
+    // Blocos invisíveis iniciais
     for (let i = 0; i < primeiroDia; i++) {
       const td = document.createElement('td');
       td.className = vr.diasDaSem[i];
@@ -45,14 +55,14 @@ class Calendario {
       trAtual.append(td);
     }
 
-    // Carrega TODA a programação do mês de uma vez (otimização principal)
-    const progMes = await window.buscarProgramacaoDoMes?.(mes, ano) || {};  // função nova no firebase-ops.js
+    // Carrega programação do mês inteiro de uma vez
+    const progMes = await window.buscarProgramacaoDoMes?.(mes, ano) || {};
     const aniversariantes = await window.buscarAniversariantesDoMes(mes);
 
-    // Cria todos os dias em paralelo
+    // Cria e atualiza todos os dias
     const promisesAtualizacao = [];
-    for (let i = 1; i <= UltimoDiaDoMes(mes, ano); i++) {
-      const semana = vr.diasDaSem[descobreDia(i, mes, ano)];
+    for (let i = 1; i <= this.UltimoDiaDoMes(mes, ano); i++) {  // ← usa interna
+      const semana = vr.diasDaSem[this.descobreDia(i, mes, ano)];  // ← interna
       const diaObj = new Dia(i, semana);
 
       const td = document.createElement('td');
@@ -61,32 +71,21 @@ class Calendario {
 
       trAtual.append(td);
 
-      if ((primeiroDia + i) % 7 === 0 && i < UltimoDiaDoMes(mes, ano)) {
+      // Nova linha a cada 7 dias
+      if ((primeiroDia + i) % 7 === 0 && i < this.UltimoDiaDoMes(mes, ano)) {
         trAtual = document.createElement('tr');
         tabela.append(trAtual);
       }
 
-      // Prepara atualização assíncrona (não await aqui ainda)
-      const progDia = progMes[i] || { prog: [], dir: "", preg: "", ata1: "", ata2: "", inputInf1: "", inputInf2:  "", inputInf3: "", amor: "" };
+      const progDia = progMes[i] || { prog: [], dir: "", preg: "", ata1: "", ata2: "", inputInf1: "", inputInf2: "", inputInf3: "", amor: "" };
       const aniversariantesDoDia = aniversariantes[i] || [];
       promisesAtualizacao.push(diaObj.atualizar(progDia, aniversariantesDoDia));
     }
 
-    // Executa todas as atualizações dos dias em paralelo
     await Promise.all(promisesAtualizacao);
 
-    // Atualiza sidebar de aniversariantes (última parte, rápida)
+    // Atualiza sidebar de aniversariantes
     await this.atualizarSidebarAniversariantes(primeiroDia, aniversariantes);
-  }
-
-  // Função auxiliar para calcular primeiro dia (ajustada para mês/ano específico)
-  descobreDia(dia, mes = selectMes(), ano = selectAno()) {
-    return new Date(ano, mes - 1, dia).getDay();
-  }
-
-  // Função auxiliar para último dia do mês (ajustada)
-  UltimoDiaDoMes(mes = selectMes(), ano = selectAno()) {
-    return new Date(ano, mes, 0).getDate();
   }
 
   async atualizarSidebarAniversariantes(primeiroDia, aniversariantes) {
@@ -131,7 +130,7 @@ class Calendario {
             const confirmar = confirm(`Quer excluir ${nome} do dia ${dia}?`);
             if (confirmar) {
               await window.removerAniversariante(dia, selectMes(), nome);
-              await this.renderizar(); // recarrega tudo só nesse caso raro
+              await this.renderizar(); // recarrega completo nesse caso
             }
           });
 
@@ -142,5 +141,5 @@ class Calendario {
   }
 }
 
-// Instancia globalmente
+// Instancia global
 window.calendario = new Calendario();

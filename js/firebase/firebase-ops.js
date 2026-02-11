@@ -1,15 +1,6 @@
-// js/firebase-ops.js - Todas as operações com o Firestore (agenda + aniversariantes)
+// js/firebase-ops.js - Operações com Firestore (agenda + aniversariantes)
 
-import {
-  getFirestore,
-  collection,
-  doc,
-  getDoc,
-  setDoc,
-  deleteDoc,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
+import { getFirestore, collection, doc, getDoc, setDoc, deleteDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
 
 const firebaseConfig = {
@@ -24,22 +15,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Auxiliares para coleções dinâmicas
+// ======================
+// Helpers para coleções dinâmicas (baseado na igreja atual)
 function getColecaoAgenda() {
-  if (!window.colecaoAtual) {
-    console.warn("Coleção de agenda não definida. Usando fallback.");
-    return "agenda-igreja1";
-  }
-  return window.colecaoAtual;
+  return window.colecaoAtual || "agenda-igreja1";
 }
 
 function getColecaoAniversariantes() {
-  if (!window.colecaoAtual) return "aniversariantes-igreja1";
-  return "aniversariantes-" + window.colecaoAtual.split('-')[1];
+  const igreja = window.colecaoAtual?.split('-')[1] || 'igreja1';
+  return `aniversariantes-${igreja}`;
 }
 
 // ======================
-// Agenda (cultos, dirigente, pregador, atalaias, infantil)
+// Agenda (cultos, dirigente, pregador, atalaias, infantil, amor)
 // ======================
 
 window.programacaoDoDia = async function (dia) {
@@ -47,9 +35,12 @@ window.programacaoDoDia = async function (dia) {
     const colecao = getColecaoAgenda();
     const docRef = doc(collection(db, colecao), String(dia));
     const snap = await getDoc(docRef);
-    return snap.exists() ? snap.data() : { prog: [], dir: "", preg: "", ata1: "", ata2: "", inputInf1: "", inputInf2: "", inputInf3: "", amor: "" };
+    return snap.exists() ? snap.data() : {
+      prog: [], dir: "", preg: "", ata1: "", ata2: "",
+      inputInf1: "", inputInf2: "", inputInf3: "", amor: ""
+    };
   } catch (err) {
-    console.error(`Erro ao buscar dia ${dia}:`, err);
+    console.error(`Erro ao buscar programação do dia ${dia}:`, err);
     return { prog: [], dir: "", preg: "", ata1: "", ata2: "", inputInf1: "", inputInf2: "", inputInf3: "", amor: "" };
   }
 };
@@ -60,32 +51,50 @@ window.salvarDiaNoFirestore = async function (cal) {
   try {
     const colecao = getColecaoAgenda();
     const docRef = doc(collection(db, colecao), String(cal.dia));
+
     await setDoc(docRef, {
       ...cal,
       mes: parseInt(localStorage.getItem("mes") || (new Date().getMonth() + 1)),
       ano: parseInt(localStorage.getItem("ano") || new Date().getFullYear()),
       ultimaAtualizacao: new Date().toISOString()
     }, { merge: true });
-    console.log(`Agenda salva em ${colecao} - dia ${cal.dia}`);
+
     return true;
   } catch (err) {
-    console.error("Erro ao salvar agenda:", err);
+    console.error("Erro ao salvar dia na agenda:", err);
     return false;
   }
 };
 
 window.apagarDiaNoFirestore = async function (dia) {
-
-  console.log(dia, 'dia teste')
   try {
     const colecao = getColecaoAgenda();
     const docRef = doc(collection(db, colecao), String(dia));
     await deleteDoc(docRef);
-    console.log(`Agenda apagada de ${colecao} - dia ${dia}`);
     return true;
   } catch (err) {
-    console.error("Erro ao apagar agenda:", err);
+    console.error("Erro ao apagar dia da agenda:", err);
     return false;
+  }
+};
+
+window.buscarProgramacaoDoMes = async function (mes, ano) {
+  const colecao = getColecaoAgenda();
+  const programacao = {};
+
+  try {
+    const querySnapshot = await getDocs(collection(db, colecao));
+    querySnapshot.forEach(docSnap => {
+      const data = docSnap.data();
+      if (data.mes === parseInt(mes) && data.ano === parseInt(ano)) {
+        const dia = parseInt(docSnap.id);
+        programacao[dia] = data;
+      }
+    });
+    return programacao;
+  } catch (err) {
+    console.error("Erro ao buscar programação do mês:", err);
+    return {};
   }
 };
 
@@ -104,7 +113,6 @@ window.salvarAniversariantes = async function (dia, mes, nomesNovos) {
     const docSnap = await getDoc(docRef);
 
     let nomesExistentes = docSnap.exists() ? (docSnap.data().nomes || []) : [];
-
     const todosNomes = [...new Set([...nomesExistentes, ...nomesNovos])];
 
     await setDoc(docRef, {
@@ -114,7 +122,6 @@ window.salvarAniversariantes = async function (dia, mes, nomesNovos) {
       ultimaAtualizacao: new Date().toISOString()
     }, { merge: true });
 
-    console.log(`Aniversariantes salvos em ${colecao}: ${todosNomes.join(", ")} - ${dia}/${mes}`);
     return true;
   } catch (err) {
     console.error("Erro ao salvar aniversariantes:", err);
@@ -138,7 +145,7 @@ window.buscarAniversariantesDoMes = async function (mes) {
     });
     return aniversariantes;
   } catch (err) {
-    console.error("Erro ao buscar aniversariantes:", err);
+    console.error("Erro ao buscar aniversariantes do mês:", err);
     return {};
   }
 };
@@ -158,10 +165,8 @@ window.removerAniversariante = async function (dia, mes, nomeRemover) {
 
     if (nomes.length === 0) {
       await deleteDoc(docRef);
-      console.log(`Documento apagado (vazio): ${docId}`);
     } else {
       await setDoc(docRef, { nomes }, { merge: true });
-      console.log(`Removido ${nomeRemover} de ${docId}. Restantes: ${nomes.join(", ")}`);
     }
 
     return true;
@@ -169,23 +174,4 @@ window.removerAniversariante = async function (dia, mes, nomeRemover) {
     console.error("Erro ao remover aniversariante:", err);
     return false;
   }
-};
-
-
-window.buscarProgramacaoDoMes = async function (mes, ano) {
-  const colecao = getColecaoAgenda();
-  const programacao = {};
-
-  const querySnapshot = await getDocs(collection(db, colecao));
-  querySnapshot.forEach(docSnap => {
-    const data = docSnap.data();
-    console.log("Documento raw do Firestore:", docSnap.id, data);  // ← log raw
-
-    if (data.mes === parseInt(mes) && data.ano === parseInt(ano)) {
-      const dia = parseInt(docSnap.id);
-      programacao[dia] = data;
-    }
-  });
-
-  return programacao;
 };

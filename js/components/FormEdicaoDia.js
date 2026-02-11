@@ -10,6 +10,13 @@ class FormEdicaoDia {
     this.bindEvents();
   }
 
+  // Função auxiliar interna: descobre o dia da semana (0=dom, 1=seg, ..., 6=sáb)
+  descobreDia(dia) {
+    const mes = selectMes();
+    const ano = selectAno();
+    return new Date(ano, mes - 1, dia).getDay();
+  }
+
   criarSelecaoAno() {
     $("#selecaoAno").empty();
     for (let i = -1; i <= 1; i++) {
@@ -32,21 +39,29 @@ class FormEdicaoDia {
 
     const progDia = await programacaoDoDia(i) || {};
 
+    // Ajusta texto do botão Registrar
     this.$btnRegistrar.val(
-      progDia.dir || progDia.preg || progDia.prog?.length > 0 || progDia.ata1 || progDia.ata2 || progDia.inputInf1 || progDia.inputInf2 || progDia.inputInf3 || progDia.amor
+      progDia.dir || progDia.preg || progDia.prog?.length > 0 ||
+      progDia.ata1 || progDia.ata2 || progDia.inputInf1 ||
+      progDia.inputInf2 || progDia.inputInf3 || progDia.amor
         ? "Atualizar Dia"
         : "Registrar Dia"
     );
 
+    // Mostra/esconde botão Limpar
     this.$btnLimpar.css("display",
-      progDia.dir || progDia.preg || progDia.prog?.length > 0 || progDia.ata1 || progDia.ata2 || progDia.inputInf1 || progDia.inputInf2 || progDia.inputInf3 || progDia.amor
+      progDia.dir || progDia.preg || progDia.prog?.length > 0 ||
+      progDia.ata1 || progDia.ata2 || progDia.inputInf1 ||
+      progDia.inputInf2 || progDia.inputInf3 || progDia.amor
         ? "block"
         : "none"
     );
 
-    $(".ESem").text(vr.diasDaSem[descobreDia(i)]);
+    // Mostra dia da semana e número do dia
+    $(".ESem").text(vr.diasDaSem[this.descobreDia(i)]);  // ← usa a versão interna
     $(".EDia").text(i);
 
+    // Preenche os campos
     $(".EProg").val((progDia.prog || []).join(", ") || "");
     $(".EDir").val(progDia.dir || "");
     $(".EPreg").val(progDia.preg || "");
@@ -59,18 +74,17 @@ class FormEdicaoDia {
 
     this.$sugestoes.empty();
 
-    if (descobreDia(i) === 0) {
+    // Mostra inputs de atalaias apenas no domingo
+    if (this.descobreDia(i) === 0) {  // ← usa interna
       $(".clTopo").css({ backgroundColor: "#eb4f4f", color: "#fff" });
-      $(".atalaiasInput").show();
+      // $(".atalaiasInput").show();  // ← comentado porque não existe no HTML atual
     } else {
       $(".clTopo").css({ backgroundColor: "#f0f0f0", color: "#222" });
-      $(".atalaiasInput").hide();
+      // $(".atalaiasInput").hide();
     }
   }
 
   async salvar() {
-
-    // Captura do dia e semana (já funcionando)
     const dia = $(".EDia").text().trim() || "";
     const sem = $(".ESem").text().trim().toUpperCase() || "";
 
@@ -79,45 +93,40 @@ class FormEdicaoDia {
       return;
     }
 
-    // Captura dos valores usando querySelector (mais confiável aqui)
-    const inputEDir = document.querySelector('.EDir');
-    const inputEPreg = document.querySelector('.EPreg');
-    const inputEProg = document.querySelector('.EProg');
-    const inputAta1 = document.querySelector('.ata1');
-    const inputAta2 = document.querySelector('.ata2');
-    const inputInf1 = document.getElementById('inputInf1');
-    const inputInf2 = document.getElementById('inputInf2');
-    const inputInf3 = document.getElementById('inputInf3');
-    const amor = document.getElementById('amor');
+    // Captura valores dos inputs
+    const inputEDir   = document.querySelector('.EDir');
+    const inputEPreg  = document.querySelector('.EPreg');
+    const inputEProg  = document.querySelector('.EProg');
+    const inputAta1   = document.querySelector('.ata1');
+    const inputAta2   = document.querySelector('.ata2');
+    const inputInf1   = document.getElementById('inputInf1');
+    const inputInf2   = document.getElementById('inputInf2');
+    const inputInf3   = document.getElementById('inputInf3');
+    const amor        = document.getElementById('amor');
 
-
-
-    const progValue = inputEProg ? (inputEProg.value || "") : "";
+    const progValue = inputEProg?.value || "";
     const arrProg = progValue
-      ? progValue.split(",").map(s => String(s || "").trim()).filter(Boolean)
+      ? progValue.split(",").map(s => s.trim()).filter(Boolean)
       : [];
 
     const cal = {
-      dia: dia,
+      dia,
       sem: sem || undefined,
       prog: arrProg.length ? arrProg : undefined,
-      dir: inputEDir ? (inputEDir.value || "").trim() || "" : "",
-      preg: inputEPreg ? (inputEPreg.value || "").trim() || "" : "",
-      ata1: inputAta1 ? (inputAta1.value || "").trim() || "" : "",
-      ata2: inputAta2 ? (inputAta2.value || "").trim() || "" : "",
-      inputInf1: inputInf1 ? (inputInf1.value || "").trim() || "": "",
-      inputInf2: inputInf2 ? (inputInf2.value || "").trim() || "": "",
-      inputInf3: inputInf3 ? (inputInf3.value || "").trim() || "" : "",
-      amor: amor ? (amor.value || "").trim() || "" : "", 
+      dir:   inputEDir?.value?.trim()  || "",
+      preg:  inputEPreg?.value?.trim() || "",
+      ata1:  inputAta1?.value?.trim()  || "",
+      ata2:  inputAta2?.value?.trim()  || "",
+      inputInf1: inputInf1?.value?.trim() || "",
+      inputInf2: inputInf2?.value?.trim() || "",
+      inputInf3: inputInf3?.value?.trim() || "",
+      amor:      amor?.value?.trim()      || "",
     };
 
     // Remove campos undefined
     Object.keys(cal).forEach(key => {
-      if (cal[key] === undefined) {
-        delete cal[key];
-      }
+      if (cal[key] === undefined) delete cal[key];
     });
-
 
     let sucesso;
     if (Object.keys(cal).length > 2) {
@@ -131,54 +140,45 @@ class FormEdicaoDia {
       return;
     }
 
-    // Atualização seletiva: só recarrega o dia alterado + sidebar de aniversariantes
+    // Atualização seletiva
     const diaNum = parseInt(cal.dia);
     const mes = selectMes();
-
-    // Busca dados atualizados só desse dia
     const progDia = await programacaoDoDia(diaNum) || {};
     const aniversariantes = await window.buscarAniversariantesDoMes(mes);
     const aniversariantesDoDia = aniversariantes[diaNum] || [];
 
-    // Encontra o objeto Dia correspondente (você precisa expor ou acessar de alguma forma)
-    // Se você não tem uma coleção global de Dias, pode recriar só esse bloco
-    const semana = vr.diasDaSem[descobreDia(diaNum)];
+    const semana = vr.diasDaSem[this.descobreDia(diaNum)];  // ← usa interna
     const diaObj = new Dia(diaNum, semana);
 
-    // Atualiza o elemento já existente no DOM
     const tdExistente = document.querySelector(`td.${semana} #${semana}${diaNum}`);
     if (tdExistente) {
-      tdExistente.innerHTML = ''; // limpa
+      tdExistente.innerHTML = '';
       tdExistente.appendChild(diaObj.elemento);
       await diaObj.atualizar(progDia, aniversariantesDoDia);
     } else {
-      console.warn("Não encontrou o TD do dia para atualização seletiva");
-      // fallback: atualiza tudo (pode manter como estava)
+      console.warn("TD do dia não encontrado → recarregando tudo");
       await window.calendario.renderizar();
     }
 
-    // Atualiza apenas a parte de aniversariantes (mais rápida que calendário inteiro)
+    // Atualiza sidebars
     await window.calendario.atualizarSidebarAniversariantes(
-      vr.diasDaSem.indexOf(vr.diasDaSem[descobreDia(1)]),
+      vr.diasDaSem.indexOf(vr.diasDaSem[this.descobreDia(1)]),
       aniversariantes
     );
 
-    // Atualiza as outras sidebars se necessário (são mais leves)
-    if (window.sidebarAtalaias) await window.sidebarAtalaias.renderizar();
+    if (window.sidebarAtalaias)  await window.sidebarAtalaias.renderizar();
     if (window.sidebarInfantil) await window.sidebarInfantil.renderizar();
-    if (window.sidebarAmor) await window.sidebarAmor.renderizar();
+    if (window.sidebarAmor)      await window.sidebarAmor.renderizar();
 
-    // Opcional: limpar campos
+    // Limpa campos
     $(".EDir, .EPreg, .EProg, .ata1, .ata2, #inputInf1, #inputInf2, #inputInf3, #amor, .EAniv").val("");
     this.$btnLimpar.css("display", "none");
     this.$btnRegistrar.val("Registrar Dia");
   }
 
   bindEvents() {
-    // Botão Registrar Dia
     this.$btnRegistrar.on("click", () => this.salvar());
 
-    // Botão Salvar Aniversariante
     this.$btnSalvarAniv.on("click", async () => {
       const nomesStr = $(".EAniv").val()?.trim() || "";
       if (!nomesStr) {
@@ -198,16 +198,15 @@ class FormEdicaoDia {
       const sucesso = await window.salvarAniversariantes(dia, mes, nomes);
       if (sucesso) {
         $(".EAniv").val("");
-        if (window.atualizarIconesAniversariantes) await window.atualizarIconesAniversariantes();
-        if (window.calendario) await window.calendario.renderizar();
-        if (window.sidebarAniversariantes) await window.sidebarAniversariantes.renderizar();
+        await window.calendario.renderizar();  // recarrega calendário + sidebar
         alert("Aniversariante(s) salvo(s) com sucesso!");
       } else {
         alert("Erro ao salvar aniversariante. Veja o console.");
       }
     });
 
-    document.querySelectorAll(".clEdit input").forEach(input => {
+    // Sugestões nos inputs
+    document.querySelectorAll(".corpo input").forEach(input => {
       input.addEventListener('focusin', () => {
         const sugestoes = this.$sugestoes;
         sugestoes.empty();
@@ -219,10 +218,6 @@ class FormEdicaoDia {
             const el = document.createElement('div');
             el.textContent = item;
             el.style.cursor = 'pointer';
-            el.style.padding = '4px 8px';
-            el.style.borderRadius = '4px';
-            el.style.background = '#f0f0f0';
-            el.style.margin = '2px';
             el.addEventListener('click', () => {
               $(".EProg").val(item);
               sugestoes.empty();
@@ -237,19 +232,13 @@ class FormEdicaoDia {
             const el = document.createElement('div');
             el.textContent = item;
             el.style.cursor = 'pointer';
-            el.style.padding = '4px 8px';
-            el.style.borderRadius = '4px';
-            el.style.background = '#f0f0f0';
-            el.style.margin = '2px';
             el.addEventListener('click', () => {
               $(".EPreg").val(item);
               sugestoes.empty();
             });
             sugestoes.append(el);
           });
-          return;
         }
-
       });
 
       input.addEventListener('focusout', () => this.$sugestoes.empty());
@@ -257,5 +246,5 @@ class FormEdicaoDia {
   }
 }
 
-// Instancia o componente globalmente
+// Instancia global
 window.formEdicaoDia = new FormEdicaoDia();

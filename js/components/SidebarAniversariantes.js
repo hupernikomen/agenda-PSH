@@ -1,4 +1,4 @@
-// js/components/SidebarAniversariantes.js - Componente da lista de aniversariantes na sidebar
+// js/components/SidebarAniversariantes.js - Lista de aniversariantes na sidebar
 
 class SidebarAniversariantes {
   constructor() {
@@ -8,62 +8,73 @@ class SidebarAniversariantes {
 
   async renderizar() {
     const mes = selectMes();
-    const primeiroDia = vr.diasDaSem.indexOf(vr.diasDaSem[descobreDia(1)]);
+    const ano = selectAno();
+
+    // Calcula o dia da semana do primeiro dia do mês
+    const primeiroDiaSemana = new Date(ano, mes - 1, 1).getDay();
     const aniversariantes = await window.buscarAniversariantesDoMes(mes);
 
+    // Limpa as duas áreas possíveis
     this.$info.empty();
     this.$infoTopo.empty();
 
-    let tabela;
-    const deveMostrarTopo = primeiroDia >= 5;
+    // Decide onde posicionar a lista (topo ou inferior) para melhor visualização
+    let $tabela;
+    const deveMostrarNoTopo = primeiroDiaSemana >= 5; // Mês começa tarde na semana → usa topo
 
-    if (deveMostrarTopo) {
-      tabela = this.$infoTopo;
+    if (deveMostrarNoTopo) {
+      $tabela = this.$infoTopo;
       $('.info').css('display', 'none');
       $('.info-topo').css('display', 'block');
     } else {
-      tabela = this.$info;
+      $tabela = this.$info;
       $('.info').css('display', 'block');
       $('.info-topo').css('display', 'none');
     }
 
+    // Se não tiver aniversariantes no mês, sai cedo
     if (Object.keys(aniversariantes).length === 0) return;
 
-    for (let dia in aniversariantes) {
-      if (aniversariantes[dia].length > 0) {
-        const data = document.createElement("div");
-        const lista = document.createElement("div");
-        const diaEl = document.createElement("span");
+    // Cria elementos em memória para performance
+    const fragment = document.createDocumentFragment();
 
-        data.className = "dataNiv";
-        lista.className = "listaNiv";
-        diaEl.className = "diaNiv";
+    Object.entries(aniversariantes).forEach(([dia, nomes]) => {
+      if (!nomes?.length) return;
 
-        diaEl.append(dia);
-        data.append(diaEl, lista);
-        tabela.append(data);
+      const dataEl = document.createElement('div');
+      dataEl.className = 'dataNiv';
 
-        aniversariantes[dia].forEach(nome => {
-          const irmao = document.createElement("span");
-          irmao.className = "nome";
-          irmao.style.cursor = "pointer";
-          irmao.append(nome);
+      const diaEl = document.createElement('span');
+      diaEl.className = 'diaNiv';
+      diaEl.textContent = dia;
 
-          irmao.addEventListener("click", async () => {
-            const confirmar = confirm(`Quer excluir ${nome} do dia ${dia}?`);
-            if (confirmar) {
-              await window.removerAniversariante(dia, mes, nome);
-              await this.renderizar();  // recarrega só a sidebar
-              await atualizarIconesAniversariantes();  // atualiza balões
-            }
-          });
+      const listaEl = document.createElement('div');
+      listaEl.className = 'listaNiv';
 
-          lista.append(irmao);
+      dataEl.append(diaEl, listaEl);
+      fragment.appendChild(dataEl);
+
+      nomes.forEach(nome => {
+        const nomeEl = document.createElement('span');
+        nomeEl.className = 'nome';
+        nomeEl.style.cursor = 'pointer';
+        nomeEl.textContent = nome;
+
+        nomeEl.addEventListener('click', async () => {
+          if (confirm(`Quer excluir ${nome} do dia ${dia}?`)) {
+            await window.removerAniversariante(dia, mes, nome);
+            await this.renderizar(); // recarrega só essa sidebar
+          }
         });
-      }
-    }
+
+        listaEl.appendChild(nomeEl);
+      });
+    });
+
+    // Insere tudo de uma vez
+    $tabela.append(fragment);
   }
 }
 
-// Instancia globalmente
+// Instancia global
 window.sidebarAniversariantes = new SidebarAniversariantes();

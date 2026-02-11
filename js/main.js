@@ -1,11 +1,8 @@
-// js/main.js - Inicialização principal do sistema e eventos globais
+// js/main.js - Inicialização principal e eventos globais
 
 document.addEventListener('DOMContentLoaded', async () => {
-
   try {
-    // Única chamada inicial de renderização completa
     await renderizarTudo();
-
     console.log("Sistema inicializado com sucesso");
   } catch (err) {
     console.error("Erro na inicialização:", err);
@@ -39,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Botão Apagar Registro do Dia Atual
   $("#btnLimparBD").on("click", async () => {
-    const dia = $(".EDia").text();  // Pega o dia atual do painel aberto
+    const dia = $(".EDia").text().trim();
 
     if (!dia) {
       alert("Nenhum dia selecionado para apagar.");
@@ -50,7 +47,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const sucesso = await window.apagarDiaNoFirestore(dia);
     if (sucesso) {
-      // Recarrega tudo após apagar
       await renderizarTudo();
       console.log(`Registro do dia ${dia} apagado`);
     } else {
@@ -60,29 +56,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Botão Gerar PDF
   $("#btnSalvar").on("click", () => {
-    // Gera o PDF (imprime a página)
     window.print();
-
   });
 
-  // Função central que renderiza tudo (chamada única em todos os pontos)
+  // Função central de renderização completa
   async function renderizarTudo() {
+    await Promise.all([
+      window.calendario?.renderizar(),
+      window.sidebarAniversariantes?.renderizar(),
+      window.sidebarAtalaias?.renderizar(),
+      window.sidebarInfantil?.renderizar(),
+      window.sidebarAmor?.renderizar()
+    ]);
 
-    if (window.calendario) await window.calendario.renderizar();
-    if (window.sidebarAniversariantes) await window.sidebarAniversariantes.renderizar();
-    if (window.sidebarAtalaias) await window.sidebarAtalaias.renderizar();
-    if (window.sidebarInfantil) await window.sidebarInfantil.renderizar();
-    if (window.sidebarAmor) await window.sidebarAmor.renderizar();
-
-    // Atualiza ícones de aniversariantes (se ainda tiver)
-    if (window.atualizarIconesAniversariantes) await window.atualizarIconesAniversariantes();
-
+    // Atualiza ícones de aniversariantes se necessário
+    if (window.atualizarIconesAniversariantes) {
+      await window.atualizarIconesAniversariantes();
+    }
   }
-
-
-
-
-
-
-
 });

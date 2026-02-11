@@ -1,8 +1,14 @@
-// js/components/SidebarAtalaias.js - Otimizado para velocidade
+// js/components/SidebarAtalaias.js - Lista de Atalaias na sidebar
 
 class SidebarAtalaias {
   constructor() {
-    this.$container = $('.divAtalaias div');
+    this.$section = $('.divAtalaias');       // div pai completa
+    this.$container = $('.divAtalaias div'); // container dos itens
+  }
+
+  // Função auxiliar interna: último dia do mês
+  UltimoDiaDoMes(mes = selectMes(), ano = selectAno()) {
+    return new Date(ano, mes, 0).getDate();
   }
 
   async renderizar() {
@@ -16,18 +22,13 @@ class SidebarAtalaias {
     const mes = selectMes();
     const ano = selectAno();
 
-    // Carrega TODA a programação do mês de uma vez (batch)
     const progMes = await window.buscarProgramacaoDoMes?.(mes, ano) || {};
 
-    // Se não houver dados, mostra mensagem
-    if (Object.keys(progMes).length === 0) {
-      return;
-    }
-
-    // Constrói tudo em memória com DocumentFragment (muito mais rápido)
     const fragment = document.createDocumentFragment();
+    let encontrou = false;
 
-    for (let dia = 1; dia <= UltimoDiaDoMes(mes, ano); dia++) {
+    // Usa a versão interna agora
+    for (let dia = 1; dia <= this.UltimoDiaDoMes(mes, ano); dia++) {
       const prog = progMes[dia] || {};
       const itens = [];
 
@@ -35,13 +36,20 @@ class SidebarAtalaias {
       if (prog.ata2?.trim()) itens.push(prog.ata2.trim());
 
       if (itens.length > 0) {
+        encontrou = true;
         const linha = this.criarLinha(dia, itens);
         fragment.appendChild(linha);
       }
     }
 
-    // Insere tudo de uma única vez no DOM
     this.$container.append(fragment);
+
+    // Esconde seção se não houver dados
+    if (encontrou) {
+      this.$section.show();
+    } else {
+      this.$section.hide();
+    }
   }
 
   criarLinha(dia, itens) {
@@ -69,5 +77,4 @@ class SidebarAtalaias {
   }
 }
 
-// Instancia globalmente
 window.sidebarAtalaias = new SidebarAtalaias();
