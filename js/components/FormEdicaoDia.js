@@ -231,9 +231,9 @@ document.querySelectorAll(".corpo input").forEach(input => {
         const el = document.createElement('div');
         el.textContent = item;
         el.style.cursor = 'pointer';
-        el.style.padding = '6px 12px';
+        el.style.padding = '3px 6px';
         el.style.borderRadius = '6px';
-        el.style.margin = '4px';
+        el.style.margin = '2px';
         el.style.background = '#f0f0f0';
         el.style.userSelect = 'none'; // evita seleção de texto ao clicar
 
@@ -253,9 +253,9 @@ document.querySelectorAll(".corpo input").forEach(input => {
         const el = document.createElement('div');
         el.textContent = item;
         el.style.cursor = 'pointer';
-        el.style.padding = '6px 12px';
+        el.style.padding = '3px 6px';
         el.style.borderRadius = '6px';
-        el.style.margin = '4px';
+        el.style.margin = '2px';
         el.style.background = '#f0f0f0';
         el.style.userSelect = 'none';
 

@@ -14,12 +14,10 @@ const vr = {
 
   // Sugestões para o campo de Eventos/Programação
   eventos: [
-    "Reunião",
     "Aniv. da Igreja",
     "Batismo",
     "Bazar",
     "Ceia",
-    "Dia do Pastor",
     "EBD",
     "Evangelismo",
     "Enc. de Casais",
@@ -27,7 +25,6 @@ const vr = {
     "Fest. de Pizza",
     "Mutirão",
     "Reunião de Ministros",
-    "PGM's"
   ],
 
   // Sugestões para o campo de Pregador

@@ -476,7 +476,7 @@ input {
 }
 
 .sugestoes {
-  margin-top: 30px;
+  margin-top: 20px;
   width: 100%;
   overflow-y: auto;
 }
@@ -484,15 +484,15 @@ input {
 .sugestoes div {
   background-color: #dfdcd1;
   display: inline-block;
-  margin: 2px;
+  margin: 1px;
   border-radius: 20px;
-  padding: 2px 5px;
+  padding: 1px 2px;
   font-size: 10px;
   font-weight: 400;
 }
 
 .sugestoes div:hover {
-  color: #fff;
+  color: #777;
   cursor: pointer;
   background: #1ca977;
 }
