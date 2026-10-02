@@ -31,7 +31,7 @@ class HeaderIgreja {
       window.colecaoAtual = 'agenda-igreja1';
       localStorage.setItem('igrejaAtual', 'agenda-igreja1');
       this.$logo.text('Igreja Batista no PSH');
-      this.$nomePastor.html('<span class="material-icons">arrow_right</span>Pr. Bruno Sousa');
+      this.$nomePastor.html('<span class="material-icons">arrow_right</span>Miss. Paulo Leão');
     } else {
       window.colecaoAtual = 'agenda-igreja2';
       localStorage.setItem('igrejaAtual', 'agenda-igreja2');
