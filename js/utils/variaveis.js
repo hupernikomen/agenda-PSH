@@ -33,7 +33,10 @@ const vr = {
     "Isaac Melo",
     "Marcio",
     "Paulo Leão",
-    "Raimundo"
+    "Raimundo",
+    "RAIMUNDO Jr",
+    "RAIMUNDO",
+    "RAIMUNDO PEREIRA"
   ],
 
   // Se houver outras listas fixas (ex: atalaias, infantil), podem ser adicionadas aqui no futuro
