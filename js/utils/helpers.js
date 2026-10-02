@@ -27,9 +27,7 @@ function verificaTitulo(nome) {
   const nomeTrim = nome.trim();
 
   switch (nomeTrim) {
-    case "Raimundo":
-    case "RAIMUNDO":
-    case "RAIMUNDO Jr":
+    case "Paulo Roberto":
     case "Isaac Melo":
     case "Bruno Sousa":
     case "Pereira":
