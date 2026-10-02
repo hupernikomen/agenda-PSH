@@ -36,6 +36,7 @@ function verificaTitulo(nome) {
       return `Pr. ${nomeTrim}`;
     case "Rui":
     case "Marcio":
+    case "Paulo Leão":
       return `Miss. ${nomeTrim}`;
     case "UMMAV":
     case "MCMAV":
